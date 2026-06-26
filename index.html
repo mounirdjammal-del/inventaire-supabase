@@ -42,7 +42,7 @@
   if (!('serviceWorker' in navigator)) return;
   // La version du cache est liée à la version de l'app (voir APP_VERSION).
   // Changer la version invalide automatiquement l'ancien cache → mise à jour propre.
-  const APP_VER = 'inv-sb-3-6';
+  const APP_VER = 'inv-sb-3-9';
   const swCode = `
     const CACHE = '${APP_VER}';
     self.addEventListener('install', e => { self.skipWaiting(); });
@@ -605,7 +605,7 @@ code{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padd
             <img src="data:image/png;base64,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" alt="" style="height:16px;width:16px;border-radius:3px">
             <span style="font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.03em">MAFINTEC CONSULTING</span>
           </div>
-          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-3.6</button>
+          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-3.9</button>
         </div>
       </div>
     </div>
@@ -2081,8 +2081,12 @@ async function loadFromDB() {
     for (const s of sites) REL_SITES[s.site_id] = { site_code: s.site_code, commune: s.commune };
     for (const b of bats) REL_BATS[b.bat_id] = { bat_nom: b.bat_nom, site_id: b.site_id, direction: b.direction };
     for (const e of emps) REL_EMPS[e.emp_id] = { cbe: e.cbe, site_id: e.site_id, bat_id: e.bat_id, etage: e.etage, bureau: e.bureau, direction: e.direction, type_empl: e.type_empl, observations: e.observations, a_mouvement: e.a_mouvement };
-    for (const f of fams) REL_FAMS[f.famille_id] = { famille_nom: f.famille_nom };
-    for (const a of arts) REL_ARTS[a.article_id] = { article_nom: a.article_nom, famille_id: a.famille_id };
+    for (const f of fams) REL_FAMS[f.famille_id] = { famille_id: f.famille_id, famille_nom: f.famille_nom };
+    // Résoudre le nom de famille pour chaque article (nécessaire pour l'afficher dans la sélection d'inventaire)
+    for (const a of arts) {
+      const fam = REL_FAMS[a.famille_id] || {};
+      REL_ARTS[a.article_id] = { article_id: a.article_id, article_nom: a.article_nom, famille_id: a.famille_id, famille_nom: fam.famille_nom || '' };
+    }
 
     // 2. Inventaire unifié (gros volume, paginé)
     const rows = await sbSelectAll('inventaire', '*', 'cbi');
@@ -2352,6 +2356,7 @@ function renderSidebarActions() {
   }
   if (can('canSuivi')) html += '<button class="btn btn-block" onclick="openSuiviPanel()"><i class="ti ti-chart-bar"></i> Suivi des sites</button>';
   if (can('canExport')) html += '<button class="btn btn-block" onclick="openExport()"><i class="ti ti-download"></i> Exporter Excel</button>';
+  if (can('canExport')) html += '<button class="btn btn-block" onclick="closeSidebar();openDataCenter()" style="background:var(--info-bg);color:var(--info-txt);border-color:var(--info-bg)"><i class="ti ti-database-export"></i> Centre de téléchargement (Admin)</button>';
   if (can('canReset')) html += '<button class="btn btn-block" onclick="resetUpdates()" style="color:var(--danger-txt);border-color:var(--danger-txt)"><i class="ti ti-refresh"></i> Réinitialiser local</button>';
   el.innerHTML = html;
 }
@@ -3413,45 +3418,54 @@ async function saveRefArticle() {
   if (!famNom) { showToast('La famille est requise', 'warn'); return; }
   if (!artNom) { showToast("Le nom de l'article est requis", 'warn'); return; }
 
-  // Doublon strict
+  // Doublon strict (même article dans la même famille)
   const dup = Object.values(REL_ARTS).find(a =>
     a.article_nom.toLowerCase() === artNom.toLowerCase() &&
-    a.famille_nom.toLowerCase() === famNom.toLowerCase()
+    (a.famille_nom||'').toLowerCase() === famNom.toLowerCase()
   );
   if (dup) { showToast('Cet article existe déjà dans cette famille', 'warn'); return; }
 
-  // 1. Créer la famille si nouvelle
-  let famille_id = null;
-  for (const fid in REL_FAMS) if (REL_FAMS[fid].famille_nom === famNom) { famille_id = fid; break; }
-  if (!famille_id) {
-    famille_id = genFamId();
-    REL_FAMS[famille_id] = { famille_id, famille_nom: famNom };
-    if (!FAMS[famNom]) FAMS[famNom] = [];
-    if (gTok) {
-      try { await sAppend('Familles', [[famille_id, famNom]]); }
-      catch(e) { console.error('Append Famille', e); }
+  if (!currentUser || !navigator.onLine || !initSupabase()) {
+    showToast('Connexion requise pour ajouter un article au référentiel', 'warn'); return;
+  }
+
+  try {
+    // 1. Trouver ou créer la famille
+    let famille_id = null;
+    for (const fid in REL_FAMS) if ((REL_FAMS[fid].famille_nom||'').toLowerCase() === famNom.toLowerCase()) { famille_id = fid; break; }
+    const isNewFam = !famille_id;
+    if (isNewFam) {
+      famille_id = genFamId();
+      const { error } = await sb.from('familles').insert({ famille_id, famille_nom: famNom });
+      if (error) throw new Error('famille: ' + error.message);
+      REL_FAMS[famille_id] = { famille_id, famille_nom: famNom };
+      if (!FAMS[famNom]) FAMS[famNom] = [];
+      logActivity('ADD_FAMILLE', famNom, famille_id);
     }
-    logActivity('ADD_FAMILLE', famNom, famille_id);
+
+    // 2. Créer l'article dans Supabase
+    const article_id = genArtId();
+    const { error: errA } = await sb.from('articles').insert({ article_id, article_nom: artNom, famille_id });
+    if (errA) throw new Error('article: ' + errA.message);
+
+    // 3. Mettre à jour le cache local (avec famille_nom pour la sélection d'inventaire)
+    REL_ARTS[article_id] = { article_id, article_nom: artNom, famille_id, famille_nom: famNom };
+    if (!FAMS[famNom]) FAMS[famNom] = [];
+    if (!FAMS[famNom].includes(artNom)) FAMS[famNom].push(artNom);
+
+    // 4. Reconstruire la hiérarchie (FAMS) pour que l'article apparaisse partout
+    buildHier();
+    invalidateAllItemsCache();
+    saveLocal();
+    saveDBCache();
+    closeModal();
+    if (typeof renderArticlesView === 'function') renderArticlesView();
+    showToast(`Article "${artNom}" ajouté${isNewFam ? ' (nouvelle famille "'+famNom+'")' : ''}`, 'success');
+    logActivity('ADD_REF_ARTICLE', `${artNom} dans ${famNom}`, article_id);
+  } catch(e) {
+    showToast('Erreur ajout: ' + e.message, 'danger');
+    console.error('saveRefArticle', e);
   }
-
-  // 2. Créer l'article
-  const article_id = genArtId();
-  REL_ARTS[article_id] = { article_id, article_nom: artNom, famille_id, famille_nom: famNom };
-  if (!FAMS[famNom].includes(artNom)) FAMS[famNom].push(artNom);
-
-  if (gTok) {
-    try { await sAppend('Articles', [[article_id, artNom, famille_id]]); }
-    catch(e) { console.error('Append Article', e); }
-  }
-
-  // Reconstruire la hiérarchie pour que FAMS soit à jour partout
-  buildHier();
-  invalidateAllItemsCache();
-  saveLocal();
-  closeModal();
-  renderArticlesView();  // refresh la liste
-  showToast(`Article "${artNom}" ajouté au référentiel`, 'success');
-  logActivity('ADD_REF_ARTICLE', `${artNom} dans ${famNom}`, article_id);
 }
 
 function renderArticlesView() {
@@ -5242,19 +5256,24 @@ function renderPhotoSection(cbi) {
   const localNames = new Set(list.map(p => p.name));
   let sharedHtml = '';
   if (item && item._photoMeta) {
-    const sharedEntries = item._photoMeta.split('\n').map(line => {
+    let allMeta = item._photoMeta.split('\n').map(line => {
       const [name, by, ts, remote] = line.split('|');
       return { name: name || '', by: by || '', ts: parseInt(ts) || 0, remote: remote || '' };
-    }).filter(e => e.name && !localNames.has(e.name)); // exclure celles qu'on a déjà en local
+    }).filter(e => e.name);
+    // Détecter les entrées orphelines (sans auteur) → les nettoyer en base en arrière-plan
+    const hasOrphans = allMeta.some(e => !e.by);
+    if (hasOrphans && currentUser && navigator.onLine) {
+      cleanOrphanPhotoMeta(cbi); // nettoyage asynchrone, sans bloquer l'affichage
+    }
+    // N'afficher que les entrées d'opérateurs identifiés, pas déjà en local
+    const sharedEntries = allMeta.filter(e => e.by && !localNames.has(e.name));
     if (sharedEntries.length) {
       const chips = sharedEntries.map(e => {
-        const byName = e.by ? (USER_NAMES[(e.by || '').toLowerCase()] || e.by.split('@')[0]) : 'inconnu';
+        const byName = USER_NAMES[(e.by || '').toLowerCase()] || e.by.split('@')[0];
         const dateStr = e.ts ? new Date(e.ts).toLocaleDateString('fr-FR') : '';
         if (e.remote) {
-          // Photo disponible sur le serveur → afficher la miniature
           return `<div style="position:relative;display:inline-block;margin:4px"><a href="${e.remote}" target="_blank"><img src="${e.remote}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--accent)"></a><div style="font-size:9px;color:var(--text3);text-align:center;max-width:80px">${esc(byName)}</div></div>`;
         }
-        // Photo seulement en local chez un autre opérateur → vignette d'information
         return `<div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:80px;height:80px;margin:4px;border-radius:8px;border:1px dashed var(--border);background:var(--bg2);text-align:center;padding:4px"><i class="ti ti-camera" style="font-size:20px;color:var(--text3)"></i><div style="font-size:9px;color:var(--text2);line-height:1.2;margin-top:2px">${esc(byName)}<br>${dateStr}</div></div>`;
       }).join('');
       sharedHtml = `<div style="margin-bottom:8px"><div style="font-size:11px;color:var(--text2);margin-bottom:4px"><i class="ti ti-users"></i> Photos prises par l'équipe</div><div>${chips}</div></div>`;
@@ -5306,6 +5325,31 @@ async function uploadPhotoToStorage(blob, cbi, photoIndex) {
 // Écrit les métadonnées photos partagées dans Supabase (visibles par tous les opérateurs).
 // Format par ligne : "nomFichier|opérateur|timestamp|urlDistante"
 // IMPORTANT : fusionne avec les entrées des AUTRES opérateurs (qu'on ne doit pas écraser).
+// Retire les entrées photo orphelines (sans auteur) de la métadonnée en base.
+// Ces entrées venaient d'anciennes versions et s'affichaient comme "inconnu".
+let _cleaningMeta = {};
+async function cleanOrphanPhotoMeta(cbi) {
+  if (!sb || !navigator.onLine || _cleaningMeta[cbi]) return;
+  _cleaningMeta[cbi] = true;
+  try {
+    const { data } = await sb.from('inventaire').select('photos').eq('cbi', cbi).maybeSingle();
+    if (data && data.photos) {
+      const kept = data.photos.split('\n').map(l => {
+        const [name, by, ts, remote] = l.split('|');
+        return { name: name||'', by: by||'', ts: ts||'', remote: remote||'' };
+      }).filter(e => e.name && e.by); // garder seulement les entrées avec auteur
+      const merged = kept.map(e => `${e.name}|${e.by}|${e.ts}|${e.remote}`).join('\n');
+      await sb.from('inventaire').update({ photos: merged }).eq('cbi', cbi);
+      const item = findItemByCbi(cbi);
+      if (item) item._photoMeta = merged;
+      // Rafraîchir la section photo si ouverte
+      const sec = document.getElementById(`photo-section-${cbi}`);
+      if (sec) sec.outerHTML = renderPhotoSection(cbi);
+    }
+  } catch(e) { console.warn('cleanOrphanPhotoMeta', e); }
+  finally { delete _cleaningMeta[cbi]; }
+}
+
 async function updatePhotoUrlsInDB(cbi) {
   if (!sb || !navigator.onLine) return;
   try {
@@ -5321,14 +5365,24 @@ async function updatePhotoUrlsInDB(cbi) {
         }).filter(e => e.name);
       }
     } catch(e) {}
-    // 2. Garder uniquement les entrées des AUTRES opérateurs
-    const others = existing.filter(e => (e.by || '').toLowerCase() !== me);
-    // 3. Ajouter mes entrées actuelles (reflète mes ajouts/suppressions)
+    // 2. Garder uniquement les entrées d'AUTRES opérateurs IDENTIFIÉS.
+    //    Une entrée sans auteur (vide) est traitée comme la mienne → elle sera
+    //    remplacée par mes entrées actuelles (et donc supprimée si je l'ai retirée).
+    const mesNomsLocaux = new Set((photos[cbi] || []).map(p => p.name));
+    const others = existing.filter(e => {
+      const by = (e.by || '').toLowerCase();
+      if (!by) return false;            // auteur vide → ne pas préserver (évite les "inconnu" fantômes)
+      if (by === me) return false;      // mes propres entrées → gérées plus bas
+      return true;                      // entrée d'un autre opérateur identifié → préserver
+    });
+    // 3. Mes entrées actuelles (reflète mes ajouts/suppressions)
     const mine = (photos[cbi] || []).map(p => ({
       name: p.name || '', by: currentUser || '', ts: p.ts || Date.now(), remote: p.remoteUrl || ''
     }));
-    // 4. Recomposer et écrire
-    const merged = [...others, ...mine].map(e => `${e.name}|${e.by}|${e.ts}|${e.remote}`).join('\n');
+    // 4. Recomposer et écrire (filtrer les entrées sans nom de fichier)
+    const merged = [...others, ...mine]
+      .filter(e => e.name)
+      .map(e => `${e.name}|${e.by}|${e.ts}|${e.remote}`).join('\n');
     await sb.from('inventaire').update({ photos: merged }).eq('cbi', cbi);
     // Refléter dans l'item local
     const item = findItemByCbi(cbi);
@@ -5502,6 +5556,185 @@ async function exportFromDB() {
 function expUpd() { const rows = Object.entries(updates).map(([cbi, u]) => { const o = findItemByCbi(cbi) || {}; return { 'CBI': cbi, 'CBE': o.cbe || '', 'SITE': o.site || '', 'BATIMENT': o.bat || '', 'ETAGE': o.etage || '', 'BUREAU': o.bureau || '', 'ARTICLE': o.art || '', 'FAMILLE': o.fam || '', 'ETAT SERVICE': u.serv, 'RENOUV': u.renouv, 'OBS': u.obs, 'ARTICLE TROUVE': u.trouve || '', 'INVENTORISTE': u.by, 'DATE': new Date(u.ts).toLocaleDateString('fr-FR'), 'NOUVEAU': o._new ? 'OUI' : 'NON' }; }); dlX(rows, 'inv_updates'); closeModal(); showToast('Export téléchargé', 'success'); logActivity('EXPORT', `Mises à jour (${rows.length} lignes)`); }
 function expAll() { if (!DB.length) return; const rows = [...DB, ...newItems.filter(r => !r._newLoc)].map(r => { const u = updates[r.cbi] || {}; const pLinks = (photos[r.cbi] || []).map(p => p.viewUrl).join(' | '); const obsInitiale = (r.obs || '').trim(); const obsMaj = u.obs !== undefined ? u.obs : ''; const criteres = extractCriteresFromObs(obsMaj || obsInitiale).join(' ; '); const obsMajClean = obsMaj.split('\n').filter(l => !l.startsWith('État observé:')).join(' ').trim(); let statut = 'EN ATTENTE'; if (r._new) statut = 'NOUVEAU'; else if (u.obs && /TRANSFÉRÉ de /.test(u.obs)) statut = 'TRANSFÉRÉ'; else if (updates[r.cbi]) statut = 'INVENTORIÉ'; const ts = u.ts || r._addedAt || 0; const byEmail = u.by || r._addedBy || r.nom_inv || ''; const byName = byEmail ? (USER_NAMES[(byEmail || '').toLowerCase()] || byEmail) : ''; return { 'SITE': r.site, 'BATIMENT': r.bat, 'ETAGE': r.etage, 'BUREAU': r.bureau, 'CBE': r.cbe, 'CBI': r.cbi, 'FAMILLE': r.fam, 'ARTICLE': r.art, 'QTE': r.qty, 'ETAT SERVICE': u.serv || r.serv, 'RENOUVELABILITE': u.renouv || r.renouv, 'CRITERES ETAT': criteres, 'OBSERVATION INITIALE': obsInitiale, 'OBSERVATION MISE A JOUR': obsMajClean, 'ARTICLE TROUVE': u.trouve || '', 'N° SERIE': r.serie, 'MODELE': r.modele, 'MARQUE': r.marque, 'N° AMENDIS': r.prod || '', 'DIRECTION': r.dir, 'INVENTORISTE': byName, 'DATE': ts ? new Date(ts).toLocaleDateString('fr-FR') : '', 'STATUT': statut, 'PHOTOS': pLinks }; }); dlX(rows, 'etat_global_inventaire'); closeModal(); showToast('État global téléchargé', 'success'); logActivity('EXPORT', `État global (${rows.length} lignes)`); }
 function dlX(rows, name) { const ws = XLSX.utils.json_to_sheet(rows); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Inventaire'); XLSX.writeFile(wb, name + '_' + new Date().toISOString().split('T')[0] + '.xlsx'); }
+
+// ═══════════════════════════════════════════════════════════════
+//  CENTRE DE TÉLÉCHARGEMENT (ADMIN) — toutes les données de la base
+// ═══════════════════════════════════════════════════════════════
+// Télécharge un classeur Excel multi-feuilles
+function dlXMulti(sheets, filename) {
+  const wb = XLSX.utils.book_new();
+  for (const [sheetName, rows] of Object.entries(sheets)) {
+    const ws = XLSX.utils.json_to_sheet(rows.length ? rows : [{ '(vide)': '' }]);
+    XLSX.utils.book_append_sheet(wb, ws, sheetName.slice(0, 31)); // Excel limite à 31 car.
+  }
+  XLSX.writeFile(wb, filename + '_' + new Date().toISOString().split('T')[0] + '.xlsx');
+}
+
+// Construit les lignes "état global" depuis la table inventaire (statuts inclus)
+function buildEtatGlobalRows(rows) {
+  return rows.map(r => {
+    const byEmail = r.inventoriste || '';
+    const byName = byEmail ? (USER_NAMES[byEmail.toLowerCase()] || byEmail) : '';
+    return {
+      'SITE': r.site||'', 'BATIMENT': r.batiment||'', 'ETAGE': r.etage||'', 'BUREAU': r.bureau||'',
+      'CODE BARRE EMP': r.cbe||'', 'CODE BARRE IMMO': r.cbi||'',
+      'FAMILLE ARTICLE': r.famille||'', 'ARTICLE': r.article||'', 'QUANTITE': r.quantite||1,
+      'ETAT DE SERVICE': r.etat_service_maj||r.etat_service||'',
+      'ETAT DE RENOUVELABILITE': r.etat_renouv_maj||r.etat_renouvelabilite||'',
+      'CRITERES ETAT': r.criteres_etat||'',
+      'OBSERVATION INITIALE': r.observation_initiale||'',
+      'OBSERVATION MISE A JOUR': r.observation_maj||'',
+      'ARTICLE TROUVE': r.trouve||'',
+      'NUMERO DE SERIE': r.serie_maj||r.serie||'', 'MODELE': r.modele_maj||r.modele||'',
+      'MARQUE': r.marque_maj||r.marque||'', 'N° AMENDIS': r.num_amendis_maj||r.num_amendis||'',
+      'DIRECTION': r.direction||'', 'PATRIMOINE': r.patrimoine||'',
+      'NOM INVENTORISTE': byName, 'DATE INVENTAIRE': r.date_inventaire ? new Date(r.date_inventaire).toLocaleDateString('fr-FR') : '',
+      'STATUT': r.statut||'EN ATTENTE'
+    };
+  });
+}
+
+// Ouvre le panneau Centre de téléchargement
+function openDataCenter() {
+  if (!can('canExport')) { showToast('Accès réservé à l\'administrateur', 'danger'); return; }
+  showModal(`<div class="modal-drag"></div>
+    <div class="modal-head"><h2><i class="ti ti-database-export"></i> Centre de téléchargement</h2><button class="btn btn-sm" onclick="closeModal()"><i class="ti ti-x"></i></button></div>
+    <div class="modal-body">
+      <div class="alert" style="background:var(--info-bg);color:var(--info-txt);margin-bottom:16px"><i class="ti ti-info-circle"></i> Téléchargez les données directement depuis la base (toutes saisies confondues, tous opérateurs).</div>
+
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text2)"><i class="ti ti-package"></i> Export complet</div>
+      <button class="btn btn-primary btn-block btn-lg" onclick="dcExportComplet()"><i class="ti ti-file-spreadsheet"></i> Tout télécharger (1 fichier, plusieurs feuilles)</button>
+      <div style="font-size:11px;color:var(--text3);margin:4px 0 16px;text-align:center">État global + Inventaire + Emplacements + Référentiels + Bureaux + Journal</div>
+
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text2)"><i class="ti ti-files"></i> Téléchargements individuels</div>
+      <button class="btn btn-block" onclick="dcEtatGlobal()"><i class="ti ti-clipboard-check"></i> État global de l'inventaire</button>
+      <button class="btn btn-block" onclick="dcInventaireBrut()"><i class="ti ti-database"></i> Inventaire (données brutes)</button>
+      <button class="btn btn-block" onclick="dcEmplacements()"><i class="ti ti-map-pin"></i> Emplacements</button>
+      <button class="btn btn-block" onclick="dcReferentiels()"><i class="ti ti-list"></i> Référentiels (sites, bâtiments, familles, articles)</button>
+      <button class="btn btn-block" onclick="dcBureaux()"><i class="ti ti-lock"></i> Statuts de clôture des bureaux</button>
+      <button class="btn btn-block" onclick="dcJournal()"><i class="ti ti-history"></i> Journal d'activité</button>
+    </div>`);
+}
+
+// Export complet multi-feuilles
+async function dcExportComplet() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération de l\'export complet…', 'info');
+  try {
+    const [inv, emps, sites, bats, fams, arts, bureaux, journal] = await Promise.all([
+      sbSelectAll('inventaire', '*', 'cbi'),
+      sbSelectAll('emplacements', '*'),
+      sbSelectAll('sites', '*'),
+      sbSelectAll('batiments', '*'),
+      sbSelectAll('familles', '*'),
+      sbSelectAll('articles', '*'),
+      sbSelectAll('bureau_statuts', '*').catch(() => []),
+      sbSelectAll('activity_log', 'timestamp_,utilisateur,action,details,cible').catch(() => [])
+    ]);
+    const sheets = {
+      'État global': buildEtatGlobalRows(inv),
+      'Inventaire brut': inv,
+      'Emplacements': emps,
+      'Sites': sites,
+      'Batiments': bats,
+      'Familles': fams,
+      'Articles': arts,
+      'Bureaux clôturés': bureaux,
+      'Journal': journal.map(j => ({ DATE: j.timestamp_, UTILISATEUR: j.utilisateur, ACTION: j.action, DETAILS: j.details, CIBLE: j.cible }))
+    };
+    dlXMulti(sheets, 'export_complet_inventaire');
+    showToast(`Export complet : ${inv.length} biens, ${emps.length} emplacements`, 'success');
+    logActivity('EXPORT_COMPLET', `${inv.length} biens + référentiels + journal`, 'datacenter');
+    closeModal();
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); console.error('dcExportComplet', e); }
+}
+
+async function dcEtatGlobal() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const inv = await sbSelectAll('inventaire', '*', 'cbi');
+    dlX(buildEtatGlobalRows(inv), 'etat_global');
+    const nInv = inv.filter(r => r.statut==='INVENTORIÉ').length, nT = inv.filter(r => r.statut==='TRANSFÉRÉ').length, nN = inv.filter(r => r.statut==='NOUVEAU').length;
+    showToast(`État global : ${inv.length} lignes (${nInv} inv. / ${nT} transf. / ${nN} nouv.)`, 'success');
+    logActivity('EXPORT', `État global (${inv.length})`, 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+async function dcInventaireBrut() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const inv = await sbSelectAll('inventaire', '*', 'cbi');
+    dlX(inv, 'inventaire_brut');
+    showToast(`Inventaire brut : ${inv.length} lignes`, 'success');
+    logActivity('EXPORT', `Inventaire brut (${inv.length})`, 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+async function dcEmplacements() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const emps = await sbSelectAll('emplacements', '*');
+    // Enrichir avec les noms de site/bâtiment
+    const rows = emps.map(e => ({
+      'EMP_ID': e.emp_id, 'CODE BARRE EMP': e.cbe||'',
+      'SITE': (REL_SITES[e.site_id]||{}).site_code||e.site_id||'',
+      'BATIMENT': (REL_BATS[e.bat_id]||{}).bat_nom||e.bat_id||'',
+      'ETAGE': e.etage||'', 'BUREAU': e.bureau||'', 'DIRECTION': e.direction||'',
+      'TYPE': e.type_empl||'', 'A MOUVEMENT': e.a_mouvement ? 'OUI':'NON',
+      'OBSERVATIONS': e.observations||''
+    }));
+    dlX(rows, 'emplacements');
+    showToast(`Emplacements : ${emps.length} lignes`, 'success');
+    logActivity('EXPORT', `Emplacements (${emps.length})`, 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+async function dcReferentiels() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const [sites, bats, fams, arts] = await Promise.all([
+      sbSelectAll('sites','*'), sbSelectAll('batiments','*'),
+      sbSelectAll('familles','*'), sbSelectAll('articles','*')
+    ]);
+    dlXMulti({ 'Sites': sites, 'Batiments': bats, 'Familles': fams, 'Articles': arts }, 'referentiels');
+    showToast(`Référentiels : ${sites.length} sites, ${bats.length} bât., ${fams.length} fam., ${arts.length} art.`, 'success');
+    logActivity('EXPORT', 'Référentiels', 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+async function dcBureaux() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const b = await sbSelectAll('bureau_statuts', '*');
+    dlX(b, 'bureaux_statuts');
+    showToast(`Bureaux : ${b.length} lignes`, 'success');
+    logActivity('EXPORT', `Bureaux (${b.length})`, 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+async function dcJournal() {
+  if (!ensureOnlineForDC()) return;
+  showToast('Génération…', 'info');
+  try {
+    const j = await sbSelectAll('activity_log', 'timestamp_,utilisateur,action,details,cible');
+    const rows = j.map(x => ({ DATE: x.timestamp_, UTILISATEUR: x.utilisateur, ACTION: x.action, DETAILS: x.details, CIBLE: x.cible }));
+    dlX(rows, 'journal_activite');
+    showToast(`Journal : ${j.length} entrées`, 'success');
+    logActivity('EXPORT', `Journal (${j.length})`, 'datacenter');
+  } catch(e) { showToast('Erreur: ' + e.message, 'danger'); }
+}
+
+function ensureOnlineForDC() {
+  if (!can('canExport')) { showToast('Accès refusé', 'danger'); return false; }
+  if (!currentUser || !navigator.onLine) { showToast('Connexion requise pour télécharger depuis la base', 'warn'); return false; }
+  if (!initSupabase()) { showToast('Connexion serveur indisponible', 'danger'); return false; }
+  return true;
+}
 function resetUpdates() { if (!can('canReset')) { showToast('Accès refusé', 'danger'); return; } if (!confirm('Réinitialiser les données locales ?')) return; const before = Object.keys(updates).length; updates = {}; newItems = []; newLocs = []; pendingWrites = []; invalidateAllItemsCache();
     invalidateCbeIndex(); saveLocal(); renderMain(); renderDataStatus(); renderPendingIndicator(); showToast('Réinitialisé', 'success'); logActivity('RESET', `${before} mises à jour supprimées`, 'local'); }
 // ─────────────────────────────────────────────────────────────
