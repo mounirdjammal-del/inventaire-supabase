@@ -42,7 +42,7 @@
   if (!('serviceWorker' in navigator)) return;
   // La version du cache est liée à la version de l'app (voir APP_VERSION).
   // Changer la version invalide automatiquement l'ancien cache → mise à jour propre.
-  const APP_VER = 'inv-sb-3-3';
+  const APP_VER = 'inv-sb-3-4';
   const swCode = `
     const CACHE = '${APP_VER}';
     self.addEventListener('install', e => { self.skipWaiting(); });
@@ -123,13 +123,37 @@ let _deferredInstallPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   _deferredInstallPrompt = e;
-  // Afficher discrètement un bouton si on est connecté
+  // Afficher le bouton flottant ET rafraîchir le menu latéral
   setTimeout(() => {
     if (typeof showInstallButton === 'function') showInstallButton();
-  }, 3000);
+    if (typeof renderSidebarActions === 'function') { try { renderSidebarActions(); } catch(e) {} }
+  }, 2000);
 });
+// L'app est-elle déjà installée (lancée en mode standalone) ?
+function isPwaInstalled() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+// Déclenche l'installation depuis n'importe quel bouton
+async function installPWA() {
+  if (!_deferredInstallPrompt) {
+    if (isPwaInstalled()) { showToast('Application déjà installée', 'info'); return; }
+    showToast('Installation non disponible — utilisez le menu du navigateur (⋮ → Installer / Ajouter à l\'écran d\'accueil)', 'info');
+    return;
+  }
+  _deferredInstallPrompt.prompt();
+  try {
+    const { outcome } = await _deferredInstallPrompt.userChoice;
+    if (outcome === 'accepted') {
+      _deferredInstallPrompt = null;
+      const fb = document.getElementById('install-pwa-btn');
+      if (fb) fb.remove();
+      showToast('Application installée', 'success');
+    }
+  } catch(e) {}
+}
 function showInstallButton() {
   if (!_deferredInstallPrompt || document.getElementById('install-pwa-btn')) return;
+  if (isPwaInstalled()) return;
   const target = document.getElementById('topbar-actions') || document.getElementById('user-area');
   if (!target) return;
   const btn = document.createElement('button');
@@ -138,14 +162,12 @@ function showInstallButton() {
   btn.title = "Installer l'application sur votre appareil";
   btn.innerHTML = '<i class="ti ti-download"></i>';
   btn.style.cssText = 'background:var(--accent);color:#fff;border-color:var(--accent)';
-  btn.onclick = async () => {
-    if (!_deferredInstallPrompt) return;
-    _deferredInstallPrompt.prompt();
-    const { outcome } = await _deferredInstallPrompt.userChoice;
-    if (outcome === 'accepted') { btn.remove(); _deferredInstallPrompt = null; }
-  };
+  btn.onclick = installPWA;
   target.appendChild(btn);
 }
+// L'événement a pu se déclencher AVANT la connexion : réessayer après connexion
+window.addEventListener('appinstalled', () => { _deferredInstallPrompt = null; const fb = document.getElementById('install-pwa-btn'); if (fb) fb.remove(); });
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -583,7 +605,7 @@ code{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padd
             <img src="data:image/png;base64,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" alt="" style="height:16px;width:16px;border-radius:3px">
             <span style="font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.03em">MAFINTEC CONSULTING</span>
           </div>
-          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-3.3</button>
+          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-3.4</button>
         </div>
       </div>
     </div>
@@ -2620,7 +2642,9 @@ function rowToItem(r) {
       _retire: r.statut === 'RETIRÉ'
     } : null,
     _addedBy: r.inventoriste || '',
-    _addedAt: r.date_inventaire ? new Date(r.date_inventaire).getTime() : 0
+    _addedAt: r.date_inventaire ? new Date(r.date_inventaire).getTime() : 0,
+    // Métadonnées photos partagées (visibles par tous, format: "fichier|opérateur|date" par ligne)
+    _photoMeta: r.photos || ''
   };
 }
 
@@ -2910,6 +2934,10 @@ function renderSidebarActions() {
   let html = '';
   // Rechargement complet : disponible pour tous (action de lecture sûre)
   html += '<button class="btn btn-block btn-soft-accent" onclick="closeSidebar();forceReloadFromSheet()"><i class="ti ti-cloud-download"></i> Recharger les données</button>';
+  // Bouton d'installation PWA (visible seulement si l'installation est possible et pas déjà installée)
+  if (_deferredInstallPrompt && !isPwaInstalled()) {
+    html += '<button class="btn btn-block" onclick="closeSidebar();installPWA()" style="background:var(--accent);color:#fff;border-color:var(--accent)"><i class="ti ti-device-mobile-down"></i> Installer l\'application</button>';
+  }
   if (can('canSuivi')) html += '<button class="btn btn-block" onclick="openSuiviPanel()"><i class="ti ti-chart-bar"></i> Suivi des sites</button>';
   if (can('canExport')) html += '<button class="btn btn-block" onclick="openExport()"><i class="ti ti-download"></i> Exporter Excel</button>';
   if (can('canReset')) html += '<button class="btn btn-block" onclick="resetUpdates()" style="color:var(--danger-txt);border-color:var(--danger-txt)"><i class="ti ti-refresh"></i> Réinitialiser local</button>';
@@ -5432,14 +5460,13 @@ async function saveUpd(cbi) {
   updates[cbi] = u;
   invalidateStatsCache();
   invalidateAllItemsCache();
-    invalidateCbeIndex();
+  invalidateCbeIndex();
   saveLocal();
   closeModal();
-  renderMain();
-  renderDataStatus();
+  try { renderMain(); renderDataStatus(); } catch(e) { console.error('render après saveUpd', e); }
   showToast('✓ Article mis à jour', 'success');
-  logActivity('INVENTORY', `${item.art || 'Article'} - ${u.serv}${u.trouve ? ' - ' + u.trouve : ''}`, cbi);
-  await writeUpd(cbi, u);
+  try { logActivity('INVENTORY', `${item.art || 'Article'} - ${u.serv}${u.trouve ? ' - ' + u.trouve : ''}`, cbi); } catch(e) {}
+  try { await writeUpd(cbi, u); } catch(e) { console.error('writeUpd après saveUpd', e); showToast('Enregistrement distant différé', 'warn'); }
 }
 
 // Cache: cbi → numéro de ligne dans la feuille Inventaire (0-based)
@@ -5814,7 +5841,32 @@ function showDoublonModal(type, existing) {
 function renderPhotoSection(cbi) {
   const list = photos[cbi] || [];
   const thumbs = list.map((p, i) => `<div style="position:relative;display:inline-block;margin:4px"><a href="${p.viewUrl}" target="_blank"><img src="${p.thumbUrl}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--border)"></a><button onclick="savePhotoToGallery('${cbi}',${i})" title="Enregistrer dans la galerie" style="position:absolute;bottom:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--info-bg);color:var(--info-txt);border:none;cursor:pointer;font-size:11px"><i class="ti ti-download" style="font-size:12px"></i></button><button onclick="deletePhoto('${cbi}',${i})" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--danger-bg);color:var(--danger-txt);border:none;cursor:pointer;font-size:12px">✕</button></div>`).join('');
-  return `<div class="form-group" id="photo-section-${cbi}"><label class="form-label"><i class="ti ti-camera"></i> Photos (${list.length})</label><div id="photo-thumbs-${cbi}" style="margin-bottom:8px">${thumbs || '<div class="txt-12-muted">Aucune photo</div>'}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-camera"></i> Prendre photo<input type="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-photo"></i> Galerie<input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label><div style="font-size:11px;color:var(--text3)"><i class="ti ti-device-floppy"></i> Stockées localement (${esc(cbi)})</div></div></div>`;
+
+  // Photos PARTAGÉES (prises par d'autres opérateurs) : lues depuis les métadonnées de la base
+  const item = findItemByCbi(cbi);
+  const localNames = new Set(list.map(p => p.name));
+  let sharedHtml = '';
+  if (item && item._photoMeta) {
+    const sharedEntries = item._photoMeta.split('\n').map(line => {
+      const [name, by, ts, remote] = line.split('|');
+      return { name: name || '', by: by || '', ts: parseInt(ts) || 0, remote: remote || '' };
+    }).filter(e => e.name && !localNames.has(e.name)); // exclure celles qu'on a déjà en local
+    if (sharedEntries.length) {
+      const chips = sharedEntries.map(e => {
+        const byName = e.by ? (USER_NAMES[(e.by || '').toLowerCase()] || e.by.split('@')[0]) : 'inconnu';
+        const dateStr = e.ts ? new Date(e.ts).toLocaleDateString('fr-FR') : '';
+        if (e.remote) {
+          // Photo disponible sur le serveur → afficher la miniature
+          return `<div style="position:relative;display:inline-block;margin:4px"><a href="${e.remote}" target="_blank"><img src="${e.remote}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--accent)"></a><div style="font-size:9px;color:var(--text3);text-align:center;max-width:80px">${esc(byName)}</div></div>`;
+        }
+        // Photo seulement en local chez un autre opérateur → vignette d'information
+        return `<div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:80px;height:80px;margin:4px;border-radius:8px;border:1px dashed var(--border);background:var(--bg2);text-align:center;padding:4px"><i class="ti ti-camera" style="font-size:20px;color:var(--text3)"></i><div style="font-size:9px;color:var(--text2);line-height:1.2;margin-top:2px">${esc(byName)}<br>${dateStr}</div></div>`;
+      }).join('');
+      sharedHtml = `<div style="margin-bottom:8px"><div style="font-size:11px;color:var(--text2);margin-bottom:4px"><i class="ti ti-users"></i> Photos prises par l'équipe</div><div>${chips}</div></div>`;
+    }
+  }
+
+  return `<div class="form-group" id="photo-section-${cbi}"><label class="form-label"><i class="ti ti-camera"></i> Photos (${list.length})</label><div id="photo-thumbs-${cbi}" style="margin-bottom:8px">${thumbs || '<div class="txt-12-muted">Aucune photo locale</div>'}</div>${sharedHtml}<div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-camera"></i> Prendre photo<input type="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-photo"></i> Galerie<input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label></div></div>`;
 }
 // Compresse et met en file d'attente IndexedDB une liste de fichiers photo (mode hors-ligne)
 async function queuePhotosLocally(cbi, files) {
@@ -5870,12 +5922,19 @@ async function uploadPhotoToStorage(blob, cbi, photoIndex) {
     return pub ? pub.publicUrl : null;
   } catch(e) { console.warn('uploadPhotoToStorage', e); return null; }
 }
-// Met à jour la colonne photos (URLs) du bien dans Supabase
+// Écrit les métadonnées photos partagées dans Supabase (visibles par tous les opérateurs).
+// Format par ligne : "nomFichier|opérateur|timestamp|urlDistante"
 async function updatePhotoUrlsInDB(cbi) {
   if (!sb || !navigator.onLine) return;
   try {
-    const urls = (photos[cbi] || []).map(p => p.remoteUrl).filter(Boolean).join(' | ');
-    if (urls) await sb.from('inventaire').update({ photos: urls }).eq('cbi', cbi);
+    const list = photos[cbi] || [];
+    const meta = list.map(p => {
+      const by = p.by || currentUser || '';
+      const ts = p.ts || Date.now();
+      const remote = p.remoteUrl || '';
+      return `${p.name || ''}|${by}|${ts}|${remote}`;
+    }).join('\n');
+    await sb.from('inventaire').update({ photos: meta }).eq('cbi', cbi);
   } catch(e) { console.warn('updatePhotoUrlsInDB', e); }
 }
 
@@ -5896,7 +5955,7 @@ async function handlePhotoCapture(event, cbi) {
       downloadPhotoToDevice(compressed, cbi, photoIndex);
       // 3) Affichage immédiat
       const url = URL.createObjectURL(compressed);
-      const entry = { name, local: true, viewUrl: url, thumbUrl: url, photoIndex };
+      const entry = { name, local: true, viewUrl: url, thumbUrl: url, photoIndex, by: currentUser, ts: Date.now() };
       photos[cbi].push(entry);
       // 4) Upload vers Supabase Storage (non bloquant, si en ligne)
       uploadPhotoToStorage(compressed, cbi, photoIndex).then(remoteUrl => {
@@ -5904,6 +5963,8 @@ async function handlePhotoCapture(event, cbi) {
       });
     }
     savePhotos();
+    // Écrire les métadonnées partagées (visibles par tous, même sans le fichier)
+    updatePhotoUrlsInDB(cbi);
     const sec = document.getElementById(`photo-section-${cbi}`);
     if (sec) sec.outerHTML = renderPhotoSection(cbi);
     showToast(`${files.length} photo(s) enregistrée(s) — vérifiez vos Téléchargements/Galerie`, 'success');
