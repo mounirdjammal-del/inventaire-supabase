@@ -42,7 +42,7 @@
   if (!('serviceWorker' in navigator)) return;
   // La version du cache est liée à la version de l'app (voir APP_VERSION).
   // Changer la version invalide automatiquement l'ancien cache → mise à jour propre.
-  const APP_VER = 'inv-sb-4-0';
+  const APP_VER = 'inv-sb-4-4';
   const swCode = `
     const CACHE = '${APP_VER}';
     self.addEventListener('install', e => { self.skipWaiting(); });
@@ -605,7 +605,7 @@ code{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padd
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAfCAIAAAAa4xgvAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAIVUlEQVR42pVWa2wc1RX+zrmzu7PrfdixEyd24oQ4wcGBxHZKSIIUVaVtVCGkKiWUH6ilQCtVRRUCtWqlqg8JFalqf1CpQuJRUGlBBERpESkQ1CIEUWhJgsnLxnEeTkLi2N54196Zndm55/TH2EucF3A00mo1d+5373e+851D+KxgYiVSsfHfRMLJNc938o2JRFpsFFSmvOJEWCnL7HpiAxVVvfq2dLV3RCBSEQCN8xc1r1k3b0V3un25aWwyborZEbEIa9b3grFTlRNDY4f3FwcPVgMfIGIDtbgy/hWBiZlEBJjfsaLj67c2rduczDZHamu10FqJF9T3MIYTnCS1wenhM2/vOPbOG0G1yobVyhcDJjYqNpVyu267s+1r34wy+dDzSITcVCKRNFFNwyCseiTKqZRJZ9Q4tVpkg4BSCTeZCo9//PFzj58+tBfEAKDy2cAEELOINC5o7/3+Q4nuG4PpSQaZhrSpTFVGjpSHDk8eO+ydHQ38aRJhN93Q0jpvxerG7p5057UWicD3Uq7rsI5sf3Jgx0vMBqr2EuyLgZlZROYv6ex94JfastivTKVyDYny9Ln3d554+43JkaMWlyfPIV64umf5bXemr+ur+lUWcvOZM/94tn/7n5mNFcHcD83cu5KKNra29/3kkVpTW82fymaz3p5d/Y/99uh7b/ml80pkjCEyM8IjImYmQ8yitnzuzOldbyX8yoLVfYGhyPOaete7YTA6uJ8M09wDmzkaBlJu5ksP/Jrblmml0tCQPfXqXz58+lFvukTMBILGIVAFFFCoqoqqzChDMTZ0yD95fHHfhiiRrHlhy9p1tZNHJ0+PMDMu0PgFwEyquvaO+wobbvGnS6l87tRLTx38+9/ATCDVi7m6TKgSsTFO6ZMT1VPDi278soWqmOZV3WN7dgXeNDPX68vUi0dFWztXrbz7x55fSeUKpXf+1f/842QMNEb9nKGqygmn9MkpM3V+4abN1TBy8o0NrvvJ3t0gwsXAABHdcNePuP0aqPLk+b1/ergWVklVVeJc0qUx120+XaPECVMcHqRyuWVVl7q5lqXLSwf2TE2co1nCHQBErCrNyzpza9b7vp9pSJ/Y/rRXKhKzioBIVXEVCySKb1pfoxCEADC485UT7+3Mty1Tg9LI8MyyuApiO4bFwp71nEyzrdYmxkf+u3OGFmKoFFoWNi5eZmFnyk9JVVPJ5PixgeliUVQANC5a3NDaPnMSVVJVYiKytVCjUMm0rOiaGPo4CKt1YFYrhqhxVV8YacJNlPv3e6UyMQMEsQs6u/se/AXnF5KIMAEgUU0lcer4+UceEpXc/AWrt92Tv2EjZzOkRkmhoFklEjEBEXHa4X2/++mJvbtjIp3YkrPNrZn2jrDmJxKp4v4PABhiK2KMWXX796Lcomq5qIZZOaYrEyU+eurR8xNjuZYFNz34MC/tqk5Pc8VTECkuJH3mV4Io1+x2dGLv7lnDAQC4La1OQz6IIuv7kyPHACiRqizp2VTo2+T5frqhCQQlQMRkMhNvvXxuYJ8hWv3te2lpVzBZNMZRThCFqswJN2ESqnVjJFXL6UzritWDs2l2lAAgXWhS45BAy0VvYpwAUQtQZWJs/L03IyfBsxpWIhOEQ688JypL+zYWbvxKtVwix1GQkpCwk0jLmeHz50ZBdb5BsE46F5wcrtPgxC8kkRQCE1Po1cKKArACMmPHh8b++Bu6nHck0+nlW78TanwkAkBWjZupDX/4wR9+5XsVzP3KgC2kngAGOJYAQALARjTTQwlqQQxiJcKnD9g4AK7dsjW5rEuCCma5UGYT+QPPPeF5Fb3krLOoqKtaAZgwgChUJZnSeoe/XCslYrHRvLaORVu2VqtVYppdqMlsZmzH8+eGBwF0bt7S1HuTVAMQKwCxjpv2jxw+sGM7QIA6cR6qpZJqjUXUbXBzudpEcIG7XegUCoJRdG27R7NNqEyBjRKRWEqm5PTw4KsvAFiw/LqV370/cnKKmgEJSEWQSWdzeezYDgIULKoA/IlR8acsUTJbyLd2xPZ9hclElqzb1Ni7MapUiE0sWVVKMx156RlvqpRraun74c9q2cZIQ4AsIABUk8Ypnz5Rb4OOCpioPHG2enLEWdmrRlvWrj99aC8T7CX3FYWbza64415fmUgAM0NjNl/c9ebJ/71LxE3t7aXjA8GhfQ5zLKSYu5oXjPz7n7EY4joWsLHWTg70L+5eVw38lp6bMq88U60GuIhuYhK76tZt3N6p02ViVhBgyUlRcXTgxacVANHJA/0jB/rpyk00rmNWQEUBjO7brWGgVp229iU3bxHVOe2HWMU2X7O89atbq970LKqKkJtKnnz1+dLYWTKsYmN4Jcbch9jggg1jCxQQFUeGK/27k26mWg2W3HZXtnmBitBspgkw7Fy37T6bTMf1piBIlHQbvAPvD//nNWaj9VlWFSoXPSr2Qv643k1F9OhrLziRzzWgqann7vuTTlIJTA6zUZWlN2/OXb8h9CvxRM0KMcbUpgdffDaKonryPmeY+hmZeao41tiQK1y/vjpVzFzTlS/kzu7drawEyhaaen7w8yCZhgqTAiRq3YbC+OsvD737+kzn/iIxZwIB0cSRQ63d3YlFy8JSudDVW2iZN/7RnshGa26/J9W7IfI9jtulCiWTNH5m35O/j8IwVtIlU8nnuXFMFFFUC0sH+9vWrqfGeYFXKVzb09zRkck3tX7jW2EUGYqVA1V1XffYXx8bHTpojFGNpfbpGMTgqw+H5iKlM7NfmZoe2N+2tg/ZvPWnkotXNq/ZWLXWCJQIAKtQOhUNHjj4whMCE/dfw05+UVu60Gx9HxIpK2Jnv0L8H4p5dEgtTTRPAAAAAElFTkSuQmCC" alt="" style="height:16px;width:16px;border-radius:3px">
             <span style="font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.03em">MAFINTEC CONSULTING</span>
           </div>
-          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-4.0</button>
+          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-4.4</button>
         </div>
       </div>
     </div>
@@ -644,6 +644,20 @@ function initSupabase() {
   sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
   });
+  // Surveiller l'état d'authentification (token rafraîchi, expiré, déconnexion)
+  try {
+    sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'TOKEN_REFRESHED') {
+        console.log('[Auth] Token rafraîchi automatiquement');
+      } else if (event === 'SIGNED_OUT' || (!session && event !== 'INITIAL_SESSION')) {
+        // Session perdue (token non rafraîchissable) → prévenir et inviter à se reconnecter
+        if (currentUser) {
+          showToast('Session expirée — reconnectez-vous pour continuer à enregistrer', 'warn');
+          updateBadge('off');
+        }
+      }
+    });
+  } catch(e) { console.warn('onAuthStateChange', e); }
   return sb;
 }
 
@@ -674,6 +688,18 @@ const PERMISSIONS = {
 };
 let currentRole = 'user';
 function getRole(email) { return email ? (ROLES[email.toLowerCase()] || DEFAULT_ROLE) : DEFAULT_ROLE; }
+// Résout le nom complet d'un inventoriste à partir de son email (ou nom déjà stocké).
+// Insensible à la casse/espaces. En dernier recours, renvoie la partie avant @ (pas l'email entier).
+function resolveInventoristeName(value) {
+  if (!value) return '';
+  const v = String(value).trim();
+  const key = v.toLowerCase();
+  if (USER_NAMES[key]) return USER_NAMES[key];
+  // Si la valeur n'est pas un email, c'est peut-être déjà un nom → le garder tel quel
+  if (!v.includes('@')) return v;
+  // Email inconnu : afficher la partie locale (avant @) plutôt que l'email complet
+  return v.split('@')[0];
+}
 function can(permission) { return !!(PERMISSIONS[currentRole] || PERMISSIONS.user)[permission]; }
 
 // Charge la table des utilisateurs depuis Supabase.
@@ -854,21 +880,12 @@ function extractCriteresFromObs(obs) {
   return [];
 }
 const SK = 'inv_v4', UK = 'inv_user', GK = 'inv_gs';
-const SH_EXPORT = 'ExportFinal';
-const STATUTS_SITE = ['NON OUVERT','EN COURS','TERMINE'];
-const H_EXPORT = ['SITE','BATIMENT','ETAGE','BUREAU','CODE BARRE EMP','CODE BARRE IMMO','FAMILLE ARTICLE','ARTICLE','QUANTITE','ETAT DE SERVICE','ETAT DE RENOUVELABILITE','CRITERES ETAT','OBSERVATION INITIALE','OBSERVATION MISE A JOUR','ARTICLE TROUVE','NUMERO DE SERIE','MODELE','MARQUE','N° AMENDIS','DIRECTION','PATRIMOINE','NOM INVENTORISTE','DATE INVENTAIRE','STATUT','PHOTOS'];
-const DRIVE_FOLDER_NAME = 'Inventaire_Photos';
-
-let driveFolderId = null;
 let DB = [], HIER = {}, FAMS = {};
 let LOC_INDEX = {}; // cache: 'site|bat|etage|bureau' -> [items]
 let CBI_INDEX = {}; // cache: cbi -> item (lookup O(1))
 let _CBI_NORM_INDEX = {}; // cache: cbi normalisé -> item (détection robuste des doublons)
 let CBE_INDEX = {}; // cache: cbe -> item
 // Cache des lignes Updates : cbi → index de ligne (0-based) dans la feuille
-let UPDATES_INDEX = {};
-let UPDATES_INDEX_SIZE = 0;
-let UPDATES_PHOTOS_CACHE = {};  // cbi → URL photos déjà en feuille
 // Index relationnels (chargés depuis les tables référentielles)
 let REL_SITES = {}, REL_BATS = {}, REL_EMPS = {}, REL_FAMS = {}, REL_ARTS = {};
 let currentUser = null, updates = {}, newItems = [], newLocs = [], siteStatuts = {};
@@ -876,11 +893,9 @@ let currentUser = null, updates = {}, newItems = [], newLocs = [], siteStatuts =
 let bureauStatuts = {};
 let curLoc = { site: '', bat: '', etage: '', bureau: '' };
 // Config conservée pour compatibilité (certaines fonctions la référencent)
-let gsConf = { sheetId: 'supabase' };
 // drillState/progressFilter remplacés par UF.dashFilter/UF.dashSiteFilter/UF.dashSearch (déclarés plus bas)
 let currentView = 'inventory';
 let gTok = null, gTokExpiry = 0, syncTimer = null, refreshTimer = null, isSyncing = false, lastSync = 0;
-let googleProfile = { name: '', email: '', picture: '' };
 let pendingWrites = [];
 let photos = {};
 
@@ -982,10 +997,8 @@ function safeLocalSet(key, value) {
     if (e && (e.name === 'QuotaExceededError' || e.code === 22 || e.code === 1014)) {
       if (!_quotaWarned) {
         _quotaWarned = true;
-        if (typeof showToast === 'function') showToast('Mémoire locale pleine — les données restent synchronisées en ligne. Pensez à synchroniser puis fermer/rouvrir l\'app.', 'warn');
-        // Tentative de libération : purger le cache DB volumineux (re-téléchargeable en ligne)
-        try { localStorage.removeItem('inv_db_cache'); } catch(_) {}
-        // Réessayer une fois après purge
+        if (typeof showToast === 'function') showToast('Mémoire locale pleine — les données restent synchronisées en ligne.', 'warn');
+        // Réessayer une fois (le gros cache DB est désormais dans IndexedDB, pas localStorage)
         try { localStorage.setItem(key, value); return true; } catch(_) {}
       }
     }
@@ -1008,13 +1021,62 @@ function loadLocal() {
   } catch(e) {}
 }
 // Persistance de la DB complète + référentiels (pour consultation hors-ligne après fermeture)
-function saveDBCache() {
-  safeLocalSet('inv_db_cache', JSON.stringify({
-    db: DB,
-    rel_sites: REL_SITES, rel_bats: REL_BATS, rel_emps: REL_EMPS,
-    rel_fams: REL_FAMS, rel_arts: REL_ARTS,
-    t: Date.now()
-  }));
+// ─── CACHE DB DANS INDEXEDDB (sans limite de 5 MB, contrairement à localStorage) ───
+// Le DB complet (30k+ biens) dépasse la limite de localStorage, donc on le stocke
+// dans IndexedDB qui supporte des centaines de Mo.
+let _cacheDB = null;
+function openCacheDB() {
+  return new Promise((resolve, reject) => {
+    if (_cacheDB) return resolve(_cacheDB);
+    const req = indexedDB.open('inv_db_cache_store', 1);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('cache')) db.createObjectStore('cache', { keyPath: 'key' });
+    };
+    req.onsuccess = (e) => { _cacheDB = e.target.result; resolve(_cacheDB); };
+    req.onerror = (e) => reject(e);
+  });
+}
+async function saveDBCache() {
+  try {
+    const db = await openCacheDB();
+    const payload = {
+      key: 'main',
+      db: DB,
+      rel_sites: REL_SITES, rel_bats: REL_BATS, rel_emps: REL_EMPS,
+      rel_fams: REL_FAMS, rel_arts: REL_ARTS,
+      bureau_statuts: bureauStatuts,
+      t: Date.now()
+    };
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction('cache', 'readwrite');
+      tx.objectStore('cache').put(payload);
+      tx.oncomplete = () => resolve();
+      tx.onerror = (e) => reject(e);
+    });
+  } catch(e) { console.warn('saveDBCache (IndexedDB)', e); }
+}
+// Charge le cache DB depuis IndexedDB. Retourne true si des données ont été restaurées.
+async function loadDBCacheFromIDB() {
+  try {
+    const db = await openCacheDB();
+    const data = await new Promise((resolve) => {
+      const tx = db.transaction('cache', 'readonly');
+      const req = tx.objectStore('cache').get('main');
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+    if (!data || !data.db || !data.db.length) return false;
+    DB = data.db;
+    REL_SITES = data.rel_sites || {}; REL_BATS = data.rel_bats || {};
+    REL_EMPS = data.rel_emps || {}; REL_FAMS = data.rel_fams || {}; REL_ARTS = data.rel_arts || {};
+    if (data.bureau_statuts) bureauStatuts = data.bureau_statuts;
+    buildHier();
+    invalidateAllItemsCache();
+    invalidateCbeIndex();
+    invalidateStatsCache();
+    return true;
+  } catch(e) { console.warn('loadDBCacheFromIDB', e); return false; }
 }
 
 function loadPhotos() {
@@ -1183,16 +1245,24 @@ async function doSupabaseLogin() {
 
 // Appelé après une connexion réussie (ou une session restaurée)
 async function onAuthSuccess() {
-  const { data: { user } } = await sb.auth.getUser();
-  if (user) { currentUser = (user.email || '').toLowerCase(); try { localStorage.setItem('inv_user', currentUser); } catch(e) {} }
+  // En ligne : confirmer l'utilisateur via le réseau. Hors-ligne : garder celui restauré localement.
+  if (navigator.onLine) {
+    try {
+      const { data: { user } } = await sb.auth.getUser();
+      if (user) { currentUser = (user.email || '').toLowerCase(); try { localStorage.setItem('inv_user', currentUser); } catch(e) {} }
+    } catch(e) { console.warn('getUser (hors-ligne?)', e); }
+  } else if (!currentUser) {
+    // Repli : email mémorisé localement
+    try { currentUser = localStorage.getItem('inv_user') || null; } catch(e) {}
+  }
   // gTok sert de drapeau "connecté" pour le code hérité (renderPendingIndicator, etc.)
   gTok = currentUser || 'supabase';
   showAppShell();
   updateBadge('ok');
-  // Charger les rôles/noms depuis la table utilisateurs, puis les données
-  await loadUsersFromDB();
+  // Charger les rôles/noms depuis la table utilisateurs (si en ligne), puis les données
+  if (navigator.onLine) { await loadUsersFromDB(); }
   currentRole = getRole(currentUser);
-  console.log('[Auth] Connecté:', currentUser, '| Rôle:', currentRole);
+  console.log('[Auth] Connecté:', currentUser, '| Rôle:', currentRole, '| En ligne:', navigator.onLine);
   renderUserBadge();
   renderTopbarActions();
   if (typeof renderSidebarActions === 'function') { try { renderSidebarActions(); } catch(e) {} }
@@ -1221,28 +1291,13 @@ async function logoutSupabase() {
   window.location.reload();
 }
 
-// ── Compat : ancien code Google encore référencé ailleurs. Neutralisé. ──
-function startGoogleLogin() { /* remplacé par doSupabaseLogin */ }
-function setToken() { /* obsolète (Supabase gère la session) */ }
+
+
 
 
 // ─── GOOGLE IDENTITY SERVICES (GIS) ──────────────────────────
 // Renouvellement de token fiable via la bibliothèque officielle Google.
 // Beaucoup plus robuste que l'iframe artisanal, notamment sur mobile.
-let _gisTokenClient = null;
-let _gisReady = false;
-
-
-
-
-
-
-
-
-
-function getStoredEmail() {
-  try { return localStorage.getItem('inv_google_email') || ''; } catch(e) { return ''; }
-}
 function updateBadge(state) {
   const b = document.getElementById('gs-badge'), t = document.getElementById('gs-txt'), d = document.getElementById('gs-dot');
   if (!b) return;
@@ -1312,9 +1367,7 @@ function renderPendingIndicator() {
     }
   });
 }
-function disconnectGoogle() {
-  logoutSupabase();
-}
+
 function changeUser() {
   // Déconnexion Supabase → recharge la page et affiche l'écran de connexion email/mot de passe
   logoutSupabase();
@@ -1327,12 +1380,6 @@ function changeUser() {
 // ---------- SHEETS API ----------
 // ---------- API CENTRALISÉ AVEC RETRY EXPONENTIEL ----------
 // Pause entre tentatives (en ms)
-const _RETRY_DELAYS = [1000, 3000, 8000]; // 3 tentatives : 1s, 3s, 8s
-let _apiCallCount = 0;
-let _apiErrorCount = 0;
-
-
-
 async function sGet(range) {
   // Compat : plus utilisé en mode Supabase (lecture via sbSelectAll). Renvoie vide.
   console.warn('sGet appelé en mode Supabase (ignoré):', range);
@@ -1416,7 +1463,7 @@ function getModelesList(marque) {
 // Cache des sheetId d'onglets (title → sheetId) pour éviter les fetch metadata répétés
 let _TAB_SHEET_IDS = null;
 
-function invalidateTabSheetIds() { _TAB_SHEET_IDS = null; }
+
 
 
 
@@ -1534,6 +1581,34 @@ async function writeUpd(cbi, u) {
     patch.cbe = u._newCbe || item.cbe || '';
     patch.emp_id_origine = u._origEmpId || '';
     if (u._loc) { patch.site = u._loc.site; patch.batiment = u._loc.bat; patch.etage = u._loc.etage; patch.bureau = u._loc.bureau; }
+  }
+  // ── Détection de conflit multi-opérateurs ──
+  // Relire l'état actuel en base : si un AUTRE opérateur a déjà inventorié ce bien
+  // récemment, demander confirmation avant d'écraser (évite l'écrasement silencieux).
+  if (!u._conflictConfirmed) {
+    try {
+      const { data: cur } = await sb.from('inventaire')
+        .select('statut,inventoriste,date_inventaire,observation_maj').eq('cbi', cbi).maybeSingle();
+      if (cur && cur.statut && cur.statut !== 'EN ATTENTE') {
+        const otherBy = (cur.inventoriste || '').toLowerCase();
+        const me = (u.by || currentUser || '').toLowerCase();
+        if (otherBy && otherBy !== me) {
+          const otherName = resolveInventoristeName(cur.inventoriste);
+          const whenStr = cur.date_inventaire ? new Date(cur.date_inventaire).toLocaleString('fr-FR') : '';
+          const ok = confirm(
+            `⚠ Ce bien a déjà été traité par un autre opérateur :\n\n` +
+            `${otherName}${whenStr ? ' le ' + whenStr : ''}\n` +
+            (cur.observation_maj ? `Observation : ${cur.observation_maj}\n` : '') +
+            `\nVoulez-vous remplacer sa saisie par la vôtre ?`
+          );
+          if (!ok) {
+            showToast('Saisie annulée — données de l\'autre opérateur conservées', 'info');
+            return;
+          }
+          logActivity('CONFLIT_RESOLU', `${cbi} : ${me} remplace ${otherName}`, cbi);
+        }
+      }
+    } catch(e) { console.warn('Vérif conflit', e); /* en cas d'échec, on continue normalement */ }
   }
   try {
     const { error } = await sb.from('inventaire').update(patch).eq('cbi', cbi);
@@ -2072,6 +2147,19 @@ function rowToItem(r) {
 async function loadFromDB() {
   if (!sb) return;
   const main = document.getElementById('main');
+  // Si pas de données en mémoire, tenter d'abord le cache IndexedDB (affichage immédiat, même hors-ligne)
+  if (!DB.length) {
+    const restored = await loadDBCacheFromIDB();
+    if (restored) {
+      renderMain(); renderDataStatus();
+      // Hors-ligne : on s'arrête là, le cache suffit
+      if (!navigator.onLine) {
+        showToast(`${(DB.length + newItems.length).toLocaleString('fr-FR')} articles (cache hors-ligne)`, 'info');
+        if (typeof goView === 'function') goView('inventory');
+        return;
+      }
+    }
+  }
   if (main && !DB.length) main.innerHTML = '<div class="empty"><div class="spinner" style="width:40px;height:40px;border-width:3px;margin:0 auto 20px"></div><div>Chargement des données…</div></div>';
   setSyncing(true, 'Chargement…');
   const wasEmpty = !DB.length;
@@ -2146,10 +2234,7 @@ async function loadBureauStatutsFromDB() {
   } catch(e) { console.error('loadBureauStatutsFromDB', e); }
 }
 
-async function loadFromSheets() {
-  // Mode Supabase : rediriger vers le chargement depuis la base.
-  return loadFromDB();
-}
+
 
 async function syncNow() {
   if (!currentUser || isSyncing) return;
@@ -2363,7 +2448,6 @@ function renderSidebarActions() {
   }
   if (can('canSuivi')) html += '<button class="btn btn-block" onclick="openSuiviPanel()"><i class="ti ti-chart-bar"></i> Suivi des sites</button>';
   if (can('canExport')) html += '<button class="btn btn-block" onclick="openExport()"><i class="ti ti-download"></i> Exporter Excel</button>';
-  if (can('canExport')) html += '<button class="btn btn-block" onclick="closeSidebar();openDataCenter()" style="background:var(--info-bg);color:var(--info-txt);border-color:var(--info-bg)"><i class="ti ti-database-export"></i> Centre de téléchargement (Admin)</button>';
   if (can('canReset')) html += '<button class="btn btn-block" onclick="resetUpdates()" style="color:var(--danger-txt);border-color:var(--danger-txt)"><i class="ti ti-refresh"></i> Réinitialiser local</button>';
   el.innerHTML = html;
 }
@@ -2467,10 +2551,25 @@ function renderHome() {
   const tot = DB.length + newItems.filter(r => !r._newLoc).length;
   const inv = Object.keys(updates).length;
   const pct = tot ? Math.round(inv / tot * 100) : 0;
-  const name = googleProfile.name || currentUser || '';
+  const name = (currentUser && USER_NAMES[currentUser.toLowerCase()]) || currentUser || '';
 
   // ── STATISTIQUES UTILISATEUR ──
   const myStats = computeUserStats(currentUser);
+
+  // ── CENTRE DE TÉLÉCHARGEMENT (admin uniquement) ──
+  const adminDownloads = can('canExport') ? `
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-xl);padding:18px;margin-bottom:14px;box-shadow:var(--shadow-sm)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><i class="ti ti-database-export" style="font-size:18px;color:var(--info-txt)"></i><div style="font-size:15px;font-weight:700">Centre de téléchargement</div><span style="background:var(--warn-bg);color:var(--warn-txt);border-radius:8px;padding:1px 8px;font-size:10px;font-weight:700">ADMIN</span></div>
+      <button class="btn btn-primary btn-block" style="margin-bottom:8px" onclick="dcExportComplet()"><i class="ti ti-file-spreadsheet"></i> Tout télécharger (Excel complet)</button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button class="btn btn-sm" onclick="dcEtatGlobal()"><i class="ti ti-clipboard-check"></i> État global</button>
+        <button class="btn btn-sm" onclick="dcInventaireBrut()"><i class="ti ti-database"></i> Inventaire</button>
+        <button class="btn btn-sm" onclick="dcEmplacements()"><i class="ti ti-map-pin"></i> Emplacements</button>
+        <button class="btn btn-sm" onclick="dcReferentiels()"><i class="ti ti-list"></i> Référentiels</button>
+        <button class="btn btn-sm" onclick="dcBureaux()"><i class="ti ti-lock"></i> Bureaux</button>
+        <button class="btn btn-sm" onclick="dcJournal()"><i class="ti ti-history"></i> Journal</button>
+      </div>
+    </div>` : '';
 
   main.innerHTML = `<div style="padding:8px 0 20px;max-width:500px;margin:0 auto">
     <div style="margin-bottom:24px"><div style="font-size:26px;font-weight:800;letter-spacing:-.02em">Bonjour${name ? ' ' + esc(name.split(' ')[0]) : ''} 👋</div><div style="font-size:14px;color:var(--text2);margin-top:6px;font-weight:500">Inventaire Immobilisations</div></div>
@@ -2478,8 +2577,10 @@ function renderHome() {
 
     ${myStats.total > 0 ? renderMyStatsCard(myStats) : ''}
 
+    ${adminDownloads}
+
     <div class="home-grid"><div class="home-tile tile-inventory" data-view="inventory" onclick="goViewData(this)"><div class="tile-icon"><i class="ti ti-clipboard-check"></i></div><div class="tile-label">Inventaire</div><div class="tile-sub">Réaliser l'inventaire</div></div><div class="home-tile tile-progress" data-view="progress" onclick="goViewData(this)"><div class="tile-icon"><i class="ti ti-chart-bar"></i></div><div class="tile-label">Avancement</div><div class="tile-sub">Voir la progression</div></div><div class="home-tile tile-locations" data-view="locations" onclick="goViewData(this)"><div class="tile-icon"><i class="ti ti-map-pin"></i></div><div class="tile-label">Emplacements</div><div class="tile-sub">Parcourir les lieux</div></div><div class="home-tile tile-articles" data-view="articles" onclick="goViewData(this)"><div class="tile-icon"><i class="ti ti-box"></i></div><div class="tile-label">Articles</div><div class="tile-sub">Rechercher un article</div></div></div>
-    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">${can('canSuivi') ? '<button class="btn btn-sm" onclick="openSuiviPanel()"><i class="ti ti-chart-bar"></i> Suivi sites</button>' : ''}<button class="btn btn-sm" onclick="openScanLibre()"><i class="ti ti-scan"></i> Scan libre</button>${can('canExport') ? '<button class="btn btn-sm" onclick="openExport()"><i class="ti ti-download"></i> Exporter</button>' : ''}<button class="btn btn-sm" onclick="openActivityLog()"><i class="ti ti-history"></i> Journal</button></div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">${can('canSuivi') ? '<button class="btn btn-sm" onclick="openSuiviPanel()"><i class="ti ti-chart-bar"></i> Suivi sites</button>' : ''}<button class="btn btn-sm" onclick="openScanLibre()"><i class="ti ti-scan"></i> Scan libre</button><button class="btn btn-sm" onclick="openActivityLog()"><i class="ti ti-history"></i> Journal</button></div>
   </div>`;
 }
 
@@ -2681,7 +2782,7 @@ function renderMain() {
 
 function renderInventoryHome() {
   const main = document.getElementById('main');
-  const name = googleProfile.name || currentUser || '';
+  const name = (currentUser && USER_NAMES[currentUser.toLowerCase()]) || currentUser || '';
   const tot = DB.length + newItems.filter(r => !r._newLoc).length;
   const inv = Object.keys(updates).length;
   const pct = tot ? Math.round(inv / tot * 100) : 0;
@@ -4900,11 +5001,6 @@ async function saveUpd(cbi) {
 }
 
 // Cache: cbi → numéro de ligne dans la feuille Inventaire (0-based)
-let INVENTAIRE_INDEX = {};
-let INVENTAIRE_INDEX_BUILT = false;
-
-
-
 // Met à jour la ligne inventaire dans Supabase (caractéristiques modifiées)
 async function updateInventoryRow(item) {
   if (!currentUser || !navigator.onLine || !sb) return;
@@ -5236,10 +5332,12 @@ async function saveNew() {
         const name = await storePhotoLocal(cbi, blob, photoIndex);
         downloadPhotoToDevice(blob, cbi, photoIndex);
         const url = URL.createObjectURL(blob);
-        photos[cbi].push({ name, local: true, viewUrl: url, thumbUrl: url, photoIndex });
+        photos[cbi].push({ name, local: true, viewUrl: url, thumbUrl: url, photoIndex, by: currentUser, ts: Date.now() });
         if (p.previewUrl) { try { URL.revokeObjectURL(p.previewUrl); } catch(e) {} }
       }
       savePhotos();
+      // Enregistrer les noms de photos dans le champ photos de la base
+      updatePhotoUrlsInDB(cbi);
       showToast(`✓ ${pendingPhotos.length} photo(s) enregistrée(s)`, 'success');
     } catch(err) {
       showToast('Erreur photos: ' + err.message, 'danger');
@@ -5256,38 +5354,33 @@ function showDoublonModal(type, existing) {
 // ---------- PHOTOS ----------
 function renderPhotoSection(cbi) {
   const list = photos[cbi] || [];
-  const thumbs = list.map((p, i) => `<div style="position:relative;display:inline-block;margin:4px"><a href="${p.viewUrl}" target="_blank"><img src="${p.thumbUrl}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--border)"></a><button onclick="savePhotoToGallery('${cbi}',${i})" title="Enregistrer dans la galerie" style="position:absolute;bottom:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--info-bg);color:var(--info-txt);border:none;cursor:pointer;font-size:11px"><i class="ti ti-download" style="font-size:12px"></i></button><button onclick="deletePhoto('${cbi}',${i})" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--danger-bg);color:var(--danger-txt);border:none;cursor:pointer;font-size:12px">✕</button></div>`).join('');
+  // Miniatures locales AVEC le nom du fichier affiché dessous
+  const thumbs = list.map((p, i) => `<div style="position:relative;display:inline-flex;flex-direction:column;align-items:center;margin:4px;width:90px"><div style="position:relative"><a href="${p.viewUrl}" target="_blank"><img src="${p.thumbUrl}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--border)"></a><button onclick="savePhotoToGallery('${cbi}',${i})" title="Enregistrer dans la galerie" style="position:absolute;bottom:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--info-bg);color:var(--info-txt);border:none;cursor:pointer;font-size:11px"><i class="ti ti-download" style="font-size:12px"></i></button><button onclick="deletePhoto('${cbi}',${i})" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--danger-bg);color:var(--danger-txt);border:none;cursor:pointer;font-size:12px">✕</button></div><div style="font-size:8px;color:var(--text3);text-align:center;margin-top:3px;word-break:break-all;line-height:1.2" title="${esc(p.name||'')}">${esc(p.name || '')}</div></div>`).join('');
 
-  // Photos PARTAGÉES (prises par d'autres opérateurs) : lues depuis les métadonnées de la base
+  // Photos PARTAGÉES (noms enregistrés par d'autres opérateurs) : lues depuis la base
   const item = findItemByCbi(cbi);
   const localNames = new Set(list.map(p => p.name));
   let sharedHtml = '';
   if (item && item._photoMeta) {
-    let allMeta = item._photoMeta.split('\n').map(line => {
-      const [name, by, ts, remote] = line.split('|');
-      return { name: name || '', by: by || '', ts: parseInt(ts) || 0, remote: remote || '' };
+    const allMeta = item._photoMeta.split('\n').map(line => {
+      const [name, by, ts] = line.split('|');
+      return { name: name || '', by: by || '', ts: parseInt(ts) || 0 };
     }).filter(e => e.name);
-    // Détecter les entrées orphelines (sans auteur) → les nettoyer en base en arrière-plan
-    const hasOrphans = allMeta.some(e => !e.by);
-    if (hasOrphans && currentUser && navigator.onLine) {
-      cleanOrphanPhotoMeta(cbi); // nettoyage asynchrone, sans bloquer l'affichage
-    }
-    // N'afficher que les entrées d'opérateurs identifiés, pas déjà en local
+    // Nettoyer en arrière-plan les entrées orphelines (sans auteur)
+    if (allMeta.some(e => !e.by) && currentUser && navigator.onLine) cleanOrphanPhotoMeta(cbi);
+    // Entrées d'autres opérateurs, pas déjà présentes en local
     const sharedEntries = allMeta.filter(e => e.by && !localNames.has(e.name));
     if (sharedEntries.length) {
       const chips = sharedEntries.map(e => {
         const byName = USER_NAMES[(e.by || '').toLowerCase()] || e.by.split('@')[0];
         const dateStr = e.ts ? new Date(e.ts).toLocaleDateString('fr-FR') : '';
-        if (e.remote) {
-          return `<div style="position:relative;display:inline-block;margin:4px"><a href="${e.remote}" target="_blank"><img src="${e.remote}" alt="photo" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:0.5px solid var(--accent)"></a><div style="font-size:9px;color:var(--text3);text-align:center;max-width:80px">${esc(byName)}</div></div>`;
-        }
-        return `<div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:80px;height:80px;margin:4px;border-radius:8px;border:1px dashed var(--border);background:var(--bg2);text-align:center;padding:4px"><i class="ti ti-camera" style="font-size:20px;color:var(--text3)"></i><div style="font-size:9px;color:var(--text2);line-height:1.2;margin-top:2px">${esc(byName)}<br>${dateStr}</div></div>`;
+        return `<div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:90px;min-height:80px;margin:4px;border-radius:8px;border:1px dashed var(--border);background:var(--bg2);text-align:center;padding:6px 4px"><i class="ti ti-photo" style="font-size:18px;color:var(--text3)"></i><div style="font-size:8px;color:var(--text2);line-height:1.2;margin-top:3px;word-break:break-all" title="${esc(e.name)}">${esc(e.name)}</div><div style="font-size:8px;color:var(--text3);margin-top:2px">${esc(byName)}${dateStr ? ' · ' + dateStr : ''}</div></div>`;
       }).join('');
-      sharedHtml = `<div style="margin-bottom:8px"><div style="font-size:11px;color:var(--text2);margin-bottom:4px"><i class="ti ti-users"></i> Photos prises par l'équipe</div><div>${chips}</div></div>`;
+      sharedHtml = `<div style="margin-bottom:8px"><div style="font-size:11px;color:var(--text2);margin-bottom:4px"><i class="ti ti-users"></i> Photos prises par l'équipe</div><div style="display:flex;flex-wrap:wrap">${chips}</div></div>`;
     }
   }
 
-  return `<div class="form-group" id="photo-section-${cbi}"><label class="form-label"><i class="ti ti-camera"></i> Photos (${list.length})</label><div id="photo-thumbs-${cbi}" style="margin-bottom:8px">${thumbs || '<div class="txt-12-muted">Aucune photo locale</div>'}</div>${sharedHtml}<div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-camera"></i> Prendre photo<input type="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-photo"></i> Galerie<input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label></div></div>`;
+  return `<div class="form-group" id="photo-section-${cbi}"><label class="form-label"><i class="ti ti-camera"></i> Photos (${list.length})</label><div id="photo-thumbs-${cbi}" style="margin-bottom:8px;display:flex;flex-wrap:wrap">${thumbs || '<div class="txt-12-muted">Aucune photo locale</div>'}</div>${sharedHtml}<div style="display:flex;gap:8px;flex-wrap:wrap"><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-camera"></i> Prendre photo<input type="file" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label><label class="btn btn-sm" style="cursor:pointer"><i class="ti ti-photo"></i> Galerie<input type="file" accept="image/*" multiple style="display:none" onchange="handlePhotoCapture(event,'${cbi}')"></label></div></div>`;
 }
 
 
@@ -5309,29 +5402,6 @@ function downloadPhotoToDevice(blob, cbi, photoIndex) {
   } catch(e) { console.error('downloadPhotoToDevice', e); return null; }
 }
 
-// Upload une photo vers Supabase Storage (bucket "photos"), non bloquant.
-// Chemin : {cbi}/{cbi}_{index}.jpg — retourne l'URL publique ou null.
-const SB_PHOTO_BUCKET = 'photos';
-async function uploadPhotoToStorage(blob, cbi, photoIndex) {
-  if (!sb || !navigator.onLine) return null;
-  try {
-    const safeCbi = String(cbi).replace(/[^\w-]/g, '');
-    const path = `${safeCbi}/${safeCbi}_${photoIndex}_${Date.now()}.jpg`;
-    const { data, error } = await sb.storage.from(SB_PHOTO_BUCKET).upload(path, blob, {
-      contentType: 'image/jpeg', upsert: true
-    });
-    if (error) {
-      // Bucket absent ou non autorisé : on ignore (les photos restent locales)
-      console.warn('uploadPhotoToStorage', error.message);
-      return null;
-    }
-    const { data: pub } = sb.storage.from(SB_PHOTO_BUCKET).getPublicUrl(path);
-    return pub ? pub.publicUrl : null;
-  } catch(e) { console.warn('uploadPhotoToStorage', e); return null; }
-}
-// Écrit les métadonnées photos partagées dans Supabase (visibles par tous les opérateurs).
-// Format par ligne : "nomFichier|opérateur|timestamp|urlDistante"
-// IMPORTANT : fusionne avec les entrées des AUTRES opérateurs (qu'on ne doit pas écraser).
 // Retire les entrées photo orphelines (sans auteur) de la métadonnée en base.
 // Ces entrées venaient d'anciennes versions et s'affichaient comme "inconnu".
 let _cleaningMeta = {};
@@ -5342,14 +5412,13 @@ async function cleanOrphanPhotoMeta(cbi) {
     const { data } = await sb.from('inventaire').select('photos').eq('cbi', cbi).maybeSingle();
     if (data && data.photos) {
       const kept = data.photos.split('\n').map(l => {
-        const [name, by, ts, remote] = l.split('|');
-        return { name: name||'', by: by||'', ts: ts||'', remote: remote||'' };
+        const [name, by, ts] = l.split('|');
+        return { name: name||'', by: by||'', ts: ts||'' };
       }).filter(e => e.name && e.by); // garder seulement les entrées avec auteur
-      const merged = kept.map(e => `${e.name}|${e.by}|${e.ts}|${e.remote}`).join('\n');
+      const merged = kept.map(e => `${e.name}|${e.by}|${e.ts}`).join('\n');
       await sb.from('inventaire').update({ photos: merged }).eq('cbi', cbi);
       const item = findItemByCbi(cbi);
       if (item) item._photoMeta = merged;
-      // Rafraîchir la section photo si ouverte
       const sec = document.getElementById(`photo-section-${cbi}`);
       if (sec) sec.outerHTML = renderPhotoSection(cbi);
     }
@@ -5357,41 +5426,37 @@ async function cleanOrphanPhotoMeta(cbi) {
   finally { delete _cleaningMeta[cbi]; }
 }
 
+// Écrit dans le champ "photos" de Supabase les NOMS des photos prises (sans upload du fichier).
+// Format par ligne : "nomFichier|opérateur|timestamp". Fusionne avec les entrées des autres opérateurs.
 async function updatePhotoUrlsInDB(cbi) {
   if (!sb || !navigator.onLine) return;
   try {
     const me = (currentUser || '').toLowerCase();
-    // 1. Relire la métadonnée actuelle en base (pour préserver les entrées des autres)
+    // 1. Relire la métadonnée actuelle (pour préserver les entrées des autres opérateurs)
     let existing = [];
     try {
       const { data } = await sb.from('inventaire').select('photos').eq('cbi', cbi).maybeSingle();
       if (data && data.photos) {
         existing = data.photos.split('\n').map(l => {
-          const [name, by, ts, remote] = l.split('|');
-          return { name: name||'', by: by||'', ts: ts||'', remote: remote||'' };
+          const [name, by, ts] = l.split('|');
+          return { name: name||'', by: by||'', ts: ts||'' };
         }).filter(e => e.name);
       }
     } catch(e) {}
-    // 2. Garder uniquement les entrées d'AUTRES opérateurs IDENTIFIÉS.
-    //    Une entrée sans auteur (vide) est traitée comme la mienne → elle sera
-    //    remplacée par mes entrées actuelles (et donc supprimée si je l'ai retirée).
-    const mesNomsLocaux = new Set((photos[cbi] || []).map(p => p.name));
+    // 2. Garder les entrées des AUTRES opérateurs identifiés
     const others = existing.filter(e => {
       const by = (e.by || '').toLowerCase();
-      if (!by) return false;            // auteur vide → ne pas préserver (évite les "inconnu" fantômes)
-      if (by === me) return false;      // mes propres entrées → gérées plus bas
-      return true;                      // entrée d'un autre opérateur identifié → préserver
+      return by && by !== me;
     });
-    // 3. Mes entrées actuelles (reflète mes ajouts/suppressions)
+    // 3. Mes entrées actuelles (noms de fichiers)
     const mine = (photos[cbi] || []).map(p => ({
-      name: p.name || '', by: currentUser || '', ts: p.ts || Date.now(), remote: p.remoteUrl || ''
+      name: p.name || '', by: currentUser || '', ts: p.ts || Date.now()
     }));
-    // 4. Recomposer et écrire (filtrer les entrées sans nom de fichier)
+    // 4. Recomposer et écrire (nom|opérateur|timestamp)
     const merged = [...others, ...mine]
       .filter(e => e.name)
-      .map(e => `${e.name}|${e.by}|${e.ts}|${e.remote}`).join('\n');
+      .map(e => `${e.name}|${e.by}|${e.ts}`).join('\n');
     await sb.from('inventaire').update({ photos: merged }).eq('cbi', cbi);
-    // Refléter dans l'item local
     const item = findItemByCbi(cbi);
     if (item) item._photoMeta = merged;
   } catch(e) { console.warn('updatePhotoUrlsInDB', e); }
@@ -5408,7 +5473,7 @@ async function handlePhotoCapture(event, cbi) {
       const photoIndex = startIdx + i + 1;
       // Compresser
       const compressed = await compressImage(files[i], 1200, 0.82);
-      // 1) Stocker dans l'app (pour le suivi, nommé par CBI)
+      // 1) Stocker dans l'app en local (IndexedDB), nommé par code-barres
       const name = await storePhotoLocal(cbi, compressed, photoIndex);
       // 2) Télécharger dans la tablette (→ galerie), nommé par code-barres
       downloadPhotoToDevice(compressed, cbi, photoIndex);
@@ -5416,13 +5481,9 @@ async function handlePhotoCapture(event, cbi) {
       const url = URL.createObjectURL(compressed);
       const entry = { name, local: true, viewUrl: url, thumbUrl: url, photoIndex, by: currentUser, ts: Date.now() };
       photos[cbi].push(entry);
-      // 4) Upload vers Supabase Storage (non bloquant, si en ligne)
-      uploadPhotoToStorage(compressed, cbi, photoIndex).then(remoteUrl => {
-        if (remoteUrl) { entry.remoteUrl = remoteUrl; savePhotos(); updatePhotoUrlsInDB(cbi); }
-      });
     }
     savePhotos();
-    // Écrire les métadonnées partagées (visibles par tous, même sans le fichier)
+    // Enregistrer les NOMS des photos dans le champ photos de la base (pas le fichier)
     updatePhotoUrlsInDB(cbi);
     const sec = document.getElementById(`photo-section-${cbi}`);
     if (sec) sec.outerHTML = renderPhotoSection(cbi);
@@ -5454,18 +5515,10 @@ async function deletePhoto(cbi, idx) {
   const p = photos[cbi] && photos[cbi][idx];
   if (p && p.name) { try { await deletePhotoLocal(p.name); } catch(e) {} }
   if (p && p.viewUrl && p.local) { try { URL.revokeObjectURL(p.viewUrl); } catch(e) {} }
-  // Supprimer aussi du Storage distant si la photo y était
-  if (p && p.remoteUrl && sb && navigator.onLine) {
-    try {
-      const safeCbi = String(cbi).replace(/[^\w-]/g, '');
-      const path = p.remoteUrl.split(`/${SB_PHOTO_BUCKET}/`)[1];
-      if (path) await sb.storage.from(SB_PHOTO_BUCKET).remove([decodeURIComponent(path)]);
-    } catch(e) { console.warn('remove storage', e); }
-  }
   photos[cbi].splice(idx, 1);
   if (!photos[cbi].length) delete photos[cbi];
   savePhotos();
-  // Mettre à jour la métadonnée partagée en base (fusion qui préserve les autres opérateurs)
+  // Mettre à jour les noms de photos en base (fusion qui préserve les autres opérateurs)
   await updatePhotoUrlsInDB(cbi);
   const sec = document.getElementById(`photo-section-${cbi}`);
   if (sec) sec.outerHTML = renderPhotoSection(cbi);
@@ -5520,6 +5573,7 @@ async function exportFromDB() {
   if (!can('canExport')) { showToast('Accès refusé', 'danger'); return; }
   if (!currentUser || !navigator.onLine) { showToast('Connexion requise pour l\'export depuis la base', 'warn'); return; }
   if (!initSupabase()) { showToast('Connexion serveur indisponible', 'danger'); return; }
+  await refreshUserNamesForExport();
   closeModal();
   showToast('Génération de l\'état global depuis la base…', 'info');
   try {
@@ -5527,7 +5581,7 @@ async function exportFromDB() {
     const out = rows.map(r => {
       const statut = r.statut || 'EN ATTENTE';
       const byEmail = r.inventoriste || '';
-      const byName = byEmail ? (USER_NAMES[byEmail.toLowerCase()] || byEmail) : '';
+      const byName = resolveInventoristeName(byEmail);
       const dateStr = r.date_inventaire ? new Date(r.date_inventaire).toLocaleDateString('fr-FR') : '';
       return {
         'SITE': r.site || '', 'BATIMENT': r.batiment || '', 'ETAGE': r.etage || '', 'BUREAU': r.bureau || '',
@@ -5561,7 +5615,7 @@ async function exportFromDB() {
   }
 }
 function expUpd() { const rows = Object.entries(updates).map(([cbi, u]) => { const o = findItemByCbi(cbi) || {}; return { 'CBI': cbi, 'CBE': o.cbe || '', 'SITE': o.site || '', 'BATIMENT': o.bat || '', 'ETAGE': o.etage || '', 'BUREAU': o.bureau || '', 'ARTICLE': o.art || '', 'FAMILLE': o.fam || '', 'ETAT SERVICE': u.serv, 'RENOUV': u.renouv, 'OBS': u.obs, 'ARTICLE TROUVE': u.trouve || '', 'INVENTORISTE': u.by, 'DATE': new Date(u.ts).toLocaleDateString('fr-FR'), 'NOUVEAU': o._new ? 'OUI' : 'NON' }; }); dlX(rows, 'inv_updates'); closeModal(); showToast('Export téléchargé', 'success'); logActivity('EXPORT', `Mises à jour (${rows.length} lignes)`); }
-function expAll() { if (!DB.length) return; const rows = [...DB, ...newItems.filter(r => !r._newLoc)].map(r => { const u = updates[r.cbi] || {}; const pLinks = (photos[r.cbi] || []).map(p => p.viewUrl).join(' | '); const obsInitiale = (r.obs || '').trim(); const obsMaj = u.obs !== undefined ? u.obs : ''; const criteres = extractCriteresFromObs(obsMaj || obsInitiale).join(' ; '); const obsMajClean = obsMaj.split('\n').filter(l => !l.startsWith('État observé:')).join(' ').trim(); let statut = 'EN ATTENTE'; if (r._new) statut = 'NOUVEAU'; else if (u.obs && /TRANSFÉRÉ de /.test(u.obs)) statut = 'TRANSFÉRÉ'; else if (updates[r.cbi]) statut = 'INVENTORIÉ'; const ts = u.ts || r._addedAt || 0; const byEmail = u.by || r._addedBy || r.nom_inv || ''; const byName = byEmail ? (USER_NAMES[(byEmail || '').toLowerCase()] || byEmail) : ''; return { 'SITE': r.site, 'BATIMENT': r.bat, 'ETAGE': r.etage, 'BUREAU': r.bureau, 'CBE': r.cbe, 'CBI': r.cbi, 'FAMILLE': r.fam, 'ARTICLE': r.art, 'QTE': r.qty, 'ETAT SERVICE': u.serv || r.serv, 'RENOUVELABILITE': u.renouv || r.renouv, 'CRITERES ETAT': criteres, 'OBSERVATION INITIALE': obsInitiale, 'OBSERVATION MISE A JOUR': obsMajClean, 'ARTICLE TROUVE': u.trouve || '', 'N° SERIE': r.serie, 'MODELE': r.modele, 'MARQUE': r.marque, 'N° AMENDIS': r.prod || '', 'DIRECTION': r.dir, 'INVENTORISTE': byName, 'DATE': ts ? new Date(ts).toLocaleDateString('fr-FR') : '', 'STATUT': statut, 'PHOTOS': pLinks }; }); dlX(rows, 'etat_global_inventaire'); closeModal(); showToast('État global téléchargé', 'success'); logActivity('EXPORT', `État global (${rows.length} lignes)`); }
+function expAll() { if (!DB.length) return; const rows = [...DB, ...newItems.filter(r => !r._newLoc)].map(r => { const u = updates[r.cbi] || {}; const pLinks = (photos[r.cbi] || []).map(p => p.viewUrl).join(' | '); const obsInitiale = (r.obs || '').trim(); const obsMaj = u.obs !== undefined ? u.obs : ''; const criteres = extractCriteresFromObs(obsMaj || obsInitiale).join(' ; '); const obsMajClean = obsMaj.split('\n').filter(l => !l.startsWith('État observé:')).join(' ').trim(); let statut = 'EN ATTENTE'; if (r._new) statut = 'NOUVEAU'; else if (u.obs && /TRANSFÉRÉ de /.test(u.obs)) statut = 'TRANSFÉRÉ'; else if (updates[r.cbi]) statut = 'INVENTORIÉ'; const ts = u.ts || r._addedAt || 0; const byEmail = u.by || r._addedBy || r.nom_inv || ''; const byName = resolveInventoristeName(byEmail); return { 'SITE': r.site, 'BATIMENT': r.bat, 'ETAGE': r.etage, 'BUREAU': r.bureau, 'CBE': r.cbe, 'CBI': r.cbi, 'FAMILLE': r.fam, 'ARTICLE': r.art, 'QTE': r.qty, 'ETAT SERVICE': u.serv || r.serv, 'RENOUVELABILITE': u.renouv || r.renouv, 'CRITERES ETAT': criteres, 'OBSERVATION INITIALE': obsInitiale, 'OBSERVATION MISE A JOUR': obsMajClean, 'ARTICLE TROUVE': u.trouve || '', 'N° SERIE': r.serie, 'MODELE': r.modele, 'MARQUE': r.marque, 'N° AMENDIS': r.prod || '', 'DIRECTION': r.dir, 'INVENTORISTE': byName, 'DATE': ts ? new Date(ts).toLocaleDateString('fr-FR') : '', 'STATUT': statut, 'PHOTOS': pLinks }; }); dlX(rows, 'etat_global_inventaire'); closeModal(); showToast('État global téléchargé', 'success'); logActivity('EXPORT', `État global (${rows.length} lignes)`); }
 function dlX(rows, name) { const ws = XLSX.utils.json_to_sheet(rows); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Inventaire'); XLSX.writeFile(wb, name + '_' + new Date().toISOString().split('T')[0] + '.xlsx'); }
 
 // ═══════════════════════════════════════════════════════════════
@@ -5580,8 +5634,7 @@ function dlXMulti(sheets, filename) {
 // Construit les lignes "état global" depuis la table inventaire (statuts inclus)
 function buildEtatGlobalRows(rows) {
   return rows.map(r => {
-    const byEmail = r.inventoriste || '';
-    const byName = byEmail ? (USER_NAMES[byEmail.toLowerCase()] || byEmail) : '';
+    const byName = resolveInventoristeName(r.inventoriste);
     return {
       'SITE': r.site||'', 'BATIMENT': r.batiment||'', 'ETAGE': r.etage||'', 'BUREAU': r.bureau||'',
       'CODE BARRE EMP': r.cbe||'', 'CODE BARRE IMMO': r.cbi||'',
@@ -5601,31 +5654,12 @@ function buildEtatGlobalRows(rows) {
   });
 }
 
-// Ouvre le panneau Centre de téléchargement
-function openDataCenter() {
-  if (!can('canExport')) { showToast('Accès réservé à l\'administrateur', 'danger'); return; }
-  showModal(`<div class="modal-drag"></div>
-    <div class="modal-head"><h2><i class="ti ti-database-export"></i> Centre de téléchargement</h2><button class="btn btn-sm" onclick="closeModal()"><i class="ti ti-x"></i></button></div>
-    <div class="modal-body">
-      <div class="alert" style="background:var(--info-bg);color:var(--info-txt);margin-bottom:16px"><i class="ti ti-info-circle"></i> Téléchargez les données directement depuis la base (toutes saisies confondues, tous opérateurs).</div>
 
-      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text2)"><i class="ti ti-package"></i> Export complet</div>
-      <button class="btn btn-primary btn-block btn-lg" onclick="dcExportComplet()"><i class="ti ti-file-spreadsheet"></i> Tout télécharger (1 fichier, plusieurs feuilles)</button>
-      <div style="font-size:11px;color:var(--text3);margin:4px 0 16px;text-align:center">État global + Inventaire + Emplacements + Référentiels + Bureaux + Journal</div>
-
-      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text2)"><i class="ti ti-files"></i> Téléchargements individuels</div>
-      <button class="btn btn-block" onclick="dcEtatGlobal()"><i class="ti ti-clipboard-check"></i> État global de l'inventaire</button>
-      <button class="btn btn-block" onclick="dcInventaireBrut()"><i class="ti ti-database"></i> Inventaire (données brutes)</button>
-      <button class="btn btn-block" onclick="dcEmplacements()"><i class="ti ti-map-pin"></i> Emplacements</button>
-      <button class="btn btn-block" onclick="dcReferentiels()"><i class="ti ti-list"></i> Référentiels (sites, bâtiments, familles, articles)</button>
-      <button class="btn btn-block" onclick="dcBureaux()"><i class="ti ti-lock"></i> Statuts de clôture des bureaux</button>
-      <button class="btn btn-block" onclick="dcJournal()"><i class="ti ti-history"></i> Journal d'activité</button>
-    </div>`);
-}
 
 // Export complet multi-feuilles
 async function dcExportComplet() {
   if (!ensureOnlineForDC()) return;
+  await refreshUserNamesForExport();
   showToast('Génération de l\'export complet…', 'info');
   try {
     const [inv, emps, sites, bats, fams, arts, bureaux, journal] = await Promise.all([
@@ -5647,7 +5681,7 @@ async function dcExportComplet() {
       'Familles': fams,
       'Articles': arts,
       'Bureaux clôturés': bureaux,
-      'Journal': journal.map(j => ({ DATE: j.timestamp_, UTILISATEUR: j.utilisateur, ACTION: j.action, DETAILS: j.details, CIBLE: j.cible }))
+      'Journal': journal.map(j => ({ DATE: j.timestamp_, UTILISATEUR: resolveInventoristeName(j.utilisateur), ACTION: j.action, DETAILS: j.details, CIBLE: j.cible }))
     };
     dlXMulti(sheets, 'export_complet_inventaire');
     showToast(`Export complet : ${inv.length} biens, ${emps.length} emplacements`, 'success');
@@ -5658,6 +5692,7 @@ async function dcExportComplet() {
 
 async function dcEtatGlobal() {
   if (!ensureOnlineForDC()) return;
+  await refreshUserNamesForExport();
   showToast('Génération…', 'info');
   try {
     const inv = await sbSelectAll('inventaire', '*', 'cbi');
@@ -5726,10 +5761,11 @@ async function dcBureaux() {
 
 async function dcJournal() {
   if (!ensureOnlineForDC()) return;
+  await refreshUserNamesForExport();
   showToast('Génération…', 'info');
   try {
     const j = await sbSelectAll('activity_log', 'timestamp_,utilisateur,action,details,cible');
-    const rows = j.map(x => ({ DATE: x.timestamp_, UTILISATEUR: x.utilisateur, ACTION: x.action, DETAILS: x.details, CIBLE: x.cible }));
+    const rows = j.map(x => ({ DATE: x.timestamp_, UTILISATEUR: resolveInventoristeName(x.utilisateur), ACTION: x.action, DETAILS: x.details, CIBLE: x.cible }));
     dlX(rows, 'journal_activite');
     showToast(`Journal : ${j.length} entrées`, 'success');
     logActivity('EXPORT', `Journal (${j.length})`, 'datacenter');
@@ -5741,6 +5777,10 @@ function ensureOnlineForDC() {
   if (!currentUser || !navigator.onLine) { showToast('Connexion requise pour télécharger depuis la base', 'warn'); return false; }
   if (!initSupabase()) { showToast('Connexion serveur indisponible', 'danger'); return false; }
   return true;
+}
+// Rafraîchit la correspondance email→nom depuis la table utilisateurs (pour les exports)
+async function refreshUserNamesForExport() {
+  try { await loadUsersFromDB(); } catch(e) {}
 }
 function resetUpdates() { if (!can('canReset')) { showToast('Accès refusé', 'danger'); return; } if (!confirm('Réinitialiser les données locales ?')) return; const before = Object.keys(updates).length; updates = {}; newItems = []; newLocs = []; pendingWrites = []; invalidateAllItemsCache();
     invalidateCbeIndex(); saveLocal(); renderMain(); renderDataStatus(); renderPendingIndicator(); showToast('Réinitialisé', 'success'); logActivity('RESET', `${before} mises à jour supprimées`, 'local'); }
@@ -5962,16 +6002,7 @@ function bureauCard(b) {
 }
 
 
-async function changeSiteStatut(site, statut) {
-  await writeSuivi(site, statut);
-  const now = new Date().toLocaleDateString('fr-FR');
-  const prev = siteStatuts[site] || {};
-  siteStatuts[site] = { statut, by: currentUser, dateDebut: prev.dateDebut || now, dateMaj: now, obs: prev.obs || '' };
-  saveLocal();
-  openSuiviPanel();
-  renderMain();
-  showToast(site + ' → ' + statut, 'success');
-}
+
 async function generateExportFinal() {
   // En mode Supabase, l'export se fait directement depuis la base.
   return exportFromDB();
