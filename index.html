@@ -42,7 +42,7 @@
   if (!('serviceWorker' in navigator)) return;
   // La version du cache est liée à la version de l'app (voir APP_VERSION).
   // Changer la version invalide automatiquement l'ancien cache → mise à jour propre.
-  const APP_VER = 'inv-sb-4-4';
+  const APP_VER = 'inv-sb-4-5';
   const swCode = `
     const CACHE = '${APP_VER}';
     self.addEventListener('install', e => { self.skipWaiting(); });
@@ -605,7 +605,7 @@ code{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padd
             <img src="data:image/png;base64,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" alt="" style="height:16px;width:16px;border-radius:3px">
             <span style="font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.03em">MAFINTEC CONSULTING</span>
           </div>
-          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-4.4</button>
+          <button onclick="checkForUpdate()" style="background:transparent;border:none;cursor:pointer;font-size:9px;color:var(--text3);font-weight:500;padding:2px 6px;display:flex;align-items:center;gap:4px" title="Vérifier les mises à jour"><i class="ti ti-refresh" style="font-size:10px"></i> Version SB-4.5</button>
         </div>
       </div>
     </div>
@@ -1025,6 +1025,7 @@ function loadLocal() {
 // Le DB complet (30k+ biens) dépasse la limite de localStorage, donc on le stocke
 // dans IndexedDB qui supporte des centaines de Mo.
 let _cacheDB = null;
+let _lastSyncTs = null; // ISO de la dernière synchro réussie (pour la sync incrémentale)
 function openCacheDB() {
   return new Promise((resolve, reject) => {
     if (_cacheDB) return resolve(_cacheDB);
@@ -1046,6 +1047,7 @@ async function saveDBCache() {
       rel_sites: REL_SITES, rel_bats: REL_BATS, rel_emps: REL_EMPS,
       rel_fams: REL_FAMS, rel_arts: REL_ARTS,
       bureau_statuts: bureauStatuts,
+      lastSync: _lastSyncTs,
       t: Date.now()
     };
     await new Promise((resolve, reject) => {
@@ -1071,6 +1073,7 @@ async function loadDBCacheFromIDB() {
     REL_SITES = data.rel_sites || {}; REL_BATS = data.rel_bats || {};
     REL_EMPS = data.rel_emps || {}; REL_FAMS = data.rel_fams || {}; REL_ARTS = data.rel_arts || {};
     if (data.bureau_statuts) bureauStatuts = data.bureau_statuts;
+    if (data.lastSync) _lastSyncTs = data.lastSync;
     buildHier();
     invalidateAllItemsCache();
     invalidateCbeIndex();
@@ -2143,23 +2146,41 @@ function rowToItem(r) {
   };
 }
 
-// Chargement principal depuis Supabase
+// Chargement principal depuis Supabase (avec SYNC INCRÉMENTALE pour réduire l'Egress)
 async function loadFromDB() {
   if (!sb) return;
   const main = document.getElementById('main');
+  let hadCache = false;
   // Si pas de données en mémoire, tenter d'abord le cache IndexedDB (affichage immédiat, même hors-ligne)
   if (!DB.length) {
-    const restored = await loadDBCacheFromIDB();
-    if (restored) {
+    hadCache = await loadDBCacheFromIDB();
+    if (hadCache) {
       renderMain(); renderDataStatus();
-      // Hors-ligne : on s'arrête là, le cache suffit
       if (!navigator.onLine) {
         showToast(`${(DB.length + newItems.length).toLocaleString('fr-FR')} articles (cache hors-ligne)`, 'info');
+        // Reconstruire updates/newItems depuis le cache
+        rebuildUpdatesFromDB();
         if (typeof goView === 'function') goView('inventory');
         return;
       }
     }
+  } else {
+    hadCache = true;
   }
+
+  // ── SYNC INCRÉMENTALE : si on a déjà un cache + une date de dernière synchro,
+  //    ne charger QUE les lignes modifiées depuis (économie d'Egress massive). ──
+  if (hadCache && _lastSyncTs && DB.length) {
+    try {
+      await incrementalSync();
+      return;
+    } catch(e) {
+      console.warn('Sync incrémentale échouée, repli sur chargement complet', e);
+      // En cas d'échec, on continue vers le chargement complet ci-dessous
+    }
+  }
+
+  // ── CHARGEMENT COMPLET (premier lancement ou cache absent) ──
   if (main && !DB.length) main.innerHTML = '<div class="empty"><div class="spinner" style="width:40px;height:40px;border-width:3px;margin:0 auto 20px"></div><div>Chargement des données…</div></div>';
   setSyncing(true, 'Chargement…');
   const wasEmpty = !DB.length;
@@ -2177,24 +2198,19 @@ async function loadFromDB() {
     for (const b of bats) REL_BATS[b.bat_id] = { bat_nom: b.bat_nom, site_id: b.site_id, direction: b.direction };
     for (const e of emps) REL_EMPS[e.emp_id] = { cbe: e.cbe, site_id: e.site_id, bat_id: e.bat_id, etage: e.etage, bureau: e.bureau, direction: e.direction, type_empl: e.type_empl, observations: e.observations, a_mouvement: e.a_mouvement };
     for (const f of fams) REL_FAMS[f.famille_id] = { famille_id: f.famille_id, famille_nom: f.famille_nom };
-    // Résoudre le nom de famille pour chaque article (nécessaire pour l'afficher dans la sélection d'inventaire)
     for (const a of arts) {
       const fam = REL_FAMS[a.famille_id] || {};
       REL_ARTS[a.article_id] = { article_id: a.article_id, article_nom: a.article_nom, famille_id: a.famille_id, famille_nom: fam.famille_nom || '' };
     }
 
-    // 2. Inventaire unifié (gros volume, paginé)
+    // 2. Inventaire unifié (gros volume, paginé) — on récupère aussi updated_at pour la sync
     const rows = await sbSelectAll('inventaire', '*', 'cbi');
     DB = rows.map(rowToItem);
+    // Mémoriser la date de synchro = max(updated_at) reçu
+    _lastSyncTs = computeMaxUpdatedAt(rows) || new Date().toISOString();
 
-    // 3. Reconstruire updates depuis les lignes (modèle unifié → compat interne)
-    updates = {}; newItems = [];
-    for (const it of DB) {
-      if (it._upd) updates[it.cbi] = it._upd;
-      if (it._new) newItems.push(it);
-    }
-    // newItems sont déjà dans DB ; on les retire de DB pour éviter les doublons d'affichage
-    DB = DB.filter(it => !it._new);
+    // 3. Reconstruire updates depuis les lignes
+    rebuildUpdatesFromDB();
 
     // 4. Statuts de clôture par bureau
     await loadBureauStatutsFromDB();
@@ -2220,6 +2236,100 @@ async function loadFromDB() {
     console.error('loadFromDB', err);
   }
   setSyncing(false);
+}
+
+// Reconstruit updates{} et newItems[] à partir de DB (modèle unifié → compat interne)
+function rebuildUpdatesFromDB() {
+  updates = {}; newItems = [];
+  for (const it of DB) {
+    if (it._upd) updates[it.cbi] = it._upd;
+    if (it._new) newItems.push(it);
+  }
+  DB = DB.filter(it => !it._new);
+}
+
+// Calcule la date de modification la plus récente parmi des lignes brutes
+function computeMaxUpdatedAt(rows) {
+  let max = null;
+  for (const r of rows) {
+    const u = r.updated_at;
+    if (u && (!max || u > max)) max = u;
+  }
+  return max;
+}
+
+// SYNC INCRÉMENTALE : ne télécharge que les lignes modifiées depuis la dernière synchro.
+// Transforme un chargement de ~8 Mo en quelques Ko quand peu de choses ont changé.
+async function incrementalSync() {
+  setSyncing(true, 'Synchronisation…');
+  try {
+    // 1. Référentiels : petits, on les recharge entièrement (négligeable en Egress)
+    const [sites, bats, emps, fams, arts] = await Promise.all([
+      sbSelectAll('sites', 'site_id,site_code,commune'),
+      sbSelectAll('batiments', 'bat_id,bat_nom,site_id,direction'),
+      sbSelectAll('emplacements', 'emp_id,cbe,site_id,bat_id,etage,bureau,direction,type_empl,observations,a_mouvement'),
+      sbSelectAll('familles', 'famille_id,famille_nom'),
+      sbSelectAll('articles', 'article_id,article_nom,famille_id')
+    ]);
+    REL_SITES = {}; REL_BATS = {}; REL_EMPS = {}; REL_FAMS = {}; REL_ARTS = {};
+    for (const s of sites) REL_SITES[s.site_id] = { site_code: s.site_code, commune: s.commune };
+    for (const b of bats) REL_BATS[b.bat_id] = { bat_nom: b.bat_nom, site_id: b.site_id, direction: b.direction };
+    for (const e of emps) REL_EMPS[e.emp_id] = { cbe: e.cbe, site_id: e.site_id, bat_id: e.bat_id, etage: e.etage, bureau: e.bureau, direction: e.direction, type_empl: e.type_empl, observations: e.observations, a_mouvement: e.a_mouvement };
+    for (const f of fams) REL_FAMS[f.famille_id] = { famille_id: f.famille_id, famille_nom: f.famille_nom };
+    for (const a of arts) {
+      const fam = REL_FAMS[a.famille_id] || {};
+      REL_ARTS[a.article_id] = { article_id: a.article_id, article_nom: a.article_nom, famille_id: a.famille_id, famille_nom: fam.famille_nom || '' };
+    }
+
+    // 2. Inventaire : SEULEMENT les lignes modifiées depuis la dernière synchro
+    let changed = [];
+    let from = 0; const PAGE = 1000;
+    while (true) {
+      const { data, error } = await sb.from('inventaire').select('*')
+        .gt('updated_at', _lastSyncTs).order('updated_at', { ascending: true })
+        .range(from, from + PAGE - 1);
+      if (error) throw error;
+      if (!data || !data.length) break;
+      changed = changed.concat(data);
+      if (data.length < PAGE) break;
+      from += PAGE;
+    }
+
+    // 3. Fusionner les changements dans DB (par cbi)
+    if (changed.length) {
+      // Index actuel par cbi (DB + newItems, car un nouveau peut avoir été ajouté)
+      const idx = {};
+      DB.forEach((it, i) => { idx[it.cbi] = { arr: 'DB', i }; });
+      // Reconstituer la liste complète, appliquer les changements
+      const fullByCbi = {};
+      for (const it of DB) fullByCbi[it.cbi] = it;
+      for (const it of newItems) fullByCbi[it.cbi] = it;
+      for (const r of changed) {
+        fullByCbi[String(r.cbi)] = rowToItem(r);
+      }
+      // Reconstruire DB + newItems
+      DB = Object.values(fullByCbi);
+      _lastSyncTs = computeMaxUpdatedAt(changed) || _lastSyncTs;
+      rebuildUpdatesFromDB();
+    }
+
+    // 4. Statuts de clôture (petit)
+    await loadBureauStatutsFromDB();
+
+    buildHier();
+    invalidateAllItemsCache();
+    invalidateCbeIndex();
+    invalidateStatsCache();
+    saveDBCache();
+    renderDataStatus();
+    renderMain();
+    renderUserBadge();
+    const n = changed.length;
+    showToast(n ? `${n} article(s) mis à jour` : 'Données à jour', n ? 'success' : 'info');
+    startAutoSync();
+  } finally {
+    setSyncing(false);
+  }
 }
 
 // Charge les statuts de clôture par bureau
@@ -2263,6 +2373,7 @@ async function forceReloadFromSheet() {
   showToast('Rechargement depuis la base…', 'info');
   try {
     DB = []; updates = {}; newItems = []; bureauStatuts = {};
+    _lastSyncTs = null; // forcer un rechargement complet
     invalidateAllItemsCache();
     invalidateCbeIndex();
     invalidateStatsCache();
@@ -2309,7 +2420,7 @@ function refreshCurrentView() {
     if (m && mainScroll) m.scrollTop = mainScroll;
   });
 }
-function startAutoSync() { if (syncTimer) clearInterval(syncTimer); syncTimer = setInterval(() => { if (gTok) syncNow(); }, 30000); }
+function startAutoSync() { if (syncTimer) clearInterval(syncTimer); syncTimer = setInterval(() => { if (gTok && navigator.onLine && !isSyncing) syncNow(); }, 180000); }
 
 // ---------- HIERARCHY ----------
 // Normalise un code barre pour comparaison fiable (évite les faux non-doublons) :
